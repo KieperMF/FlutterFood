@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1020103883992",
+    "project_id": "flutterfood-8ef11",
+    "storage_bucket": "flutterfood-8ef11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020103883992:android:677450cbf74da915cdebad",
+        "android_client_info": {
+          "package_name": "com.example.flutter_food"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGgqw4DwPty5rvzEciDNuyPMxa4kwqkiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
