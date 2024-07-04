@@ -9,7 +9,7 @@ class FoodService {
   FirebaseStorage storage = FirebaseStorage.instance;
   FirebaseFirestore firesStore = FirebaseFirestore.instance;
 
-  postFood(FoodModel foodModel) async {
+  void postFood(FoodModel foodModel) async {
     String id = foodModel.id.toString();
     try {
       foodModel.foodImage =
@@ -17,11 +17,11 @@ class FoodService {
       final ref = firesStore.collection('foods').doc(id);
       await ref.set(foodModel.toMap());
     } catch (e) {
-      debugPrint('erro posr food: $e');
+      debugPrint('erro post food: $e');
     }
   }
 
-  _uploadFoodPic(File foodImage, FoodModel food) async {
+  Future _uploadFoodPic(File foodImage, FoodModel food) async {
     try {
       Reference storageReference =
           FirebaseStorage.instance.ref().child('food_pic').child('${food.id}');
@@ -34,7 +34,7 @@ class FoodService {
     }
   }
 
-  getFoods() async {
+  Future getFoods() async {
     List<FoodModel> foods = [];
     FoodModel? food;
     final CollectionReference ref = firesStore.collection('foods');
@@ -49,6 +49,22 @@ class FoodService {
       return foods;
     } catch (e) {
       debugPrint('erro get food $e');
+    }
+  }
+
+  void updateFood(FoodModel foodSelec){
+    try{
+      firesStore.collection('foods').doc('${foodSelec.id}').update(foodSelec.toMap());
+    }catch(e){
+      debugPrint('error on update food: $e');
+    }
+  }
+
+  void deleteFood(FoodModel foodSelec){
+    try{
+      firesStore.collection('food').doc('${foodSelec.id}').delete();
+    }catch(e){
+      debugPrint('error delete food: $e');
     }
   }
 }
