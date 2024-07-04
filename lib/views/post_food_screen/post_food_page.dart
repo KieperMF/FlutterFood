@@ -21,18 +21,18 @@ class PostFoodPage extends StatefulWidget {
 }
 
 class _PostFoodPageState extends State<PostFoodPage> {
-  PostFoodStore? store;
-  TextEditingController name = TextEditingController();
-  TextEditingController description = TextEditingController();
-  TextEditingController price = TextEditingController();
-  TextEditingController avaliation = TextEditingController();
-  TextEditingController category = TextEditingController();
-  TextEditingController id = TextEditingController();
+  PostFoodStore? store; 
+  TextEditingController nameTextEditing = TextEditingController();
+  TextEditingController descriptionTextEditing = TextEditingController();
+  TextEditingController priceTextEditing = TextEditingController();
+  TextEditingController avaliationTextEditing = TextEditingController();
+  TextEditingController categoryTextEditing = TextEditingController();
+  TextEditingController idTextEditing = TextEditingController();
+  String dropDownValue = 'Fast Food';
 
   @override
   void initState() {
     store = context.read();
-    store!.getLength();
     super.initState();
   }
 
@@ -48,7 +48,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
           child: Column(
             children: [
               store!.food.foodImage == null
-                  ? const SizedBox(width: 200, child: Icon(Icons.image))
+                  ? const SizedBox(width: 200, child: Icon(Icons.image, size: 100,))
                   : SizedBox(
                       width: 200,
                       child: Image.network(
@@ -70,6 +70,62 @@ class _PostFoodPageState extends State<PostFoodPage> {
                     },
                     child: const Text('Select image')),
               ),
+              const SizedBox(
+                height: 15,
+              ), 
+              SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: nameTextEditing,
+                  decoration: InputDecoration(hintText: 'Food Name')
+                  ),
+              ),
+              const SizedBox(
+                height: 15,
+              ), 
+              SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: priceTextEditing,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(hintText: 'Price')
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ), 
+              SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: descriptionTextEditing,
+                  decoration: InputDecoration(hintText: 'Description')
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ), 
+              DropdownButton<String>(
+                value: dropDownValue,
+                items: store!.categories.map<DropdownMenuItem<String>>((String value){
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value));
+                }).toList(), 
+                onChanged: (String? value){
+                  setState(() {
+                    dropDownValue = value!;
+                  });
+                }),
+                const SizedBox(
+                height: 15,
+              ), 
+              IconButton(onPressed: (){
+                store!.food.name = nameTextEditing.text;
+                store!.food.description = descriptionTextEditing.text;
+                store!.food.category = dropDownValue;
+                store!.food.price = double.parse(priceTextEditing.text);
+                store!.postFood(store!.food);
+              }, icon: Icon(Icons.add_box_rounded))
             ],
           ),
         ),
