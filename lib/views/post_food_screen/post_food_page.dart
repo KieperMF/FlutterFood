@@ -77,7 +77,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 width: 250,
                 child: TextField(
                   controller: nameTextEditing,
-                  decoration: InputDecoration(hintText: 'Food Name')
+                  decoration: const InputDecoration(hintText: 'Food Name')
                   ),
               ),
               const SizedBox(
@@ -88,7 +88,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 child: TextField(
                   controller: priceTextEditing,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(hintText: 'Price')
+                  decoration: const InputDecoration(hintText: 'Price')
                 ),
               ),
               const SizedBox(
@@ -98,7 +98,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 width: 250,
                 child: TextField(
                   controller: descriptionTextEditing,
-                  decoration: InputDecoration(hintText: 'Description')
+                  decoration: const InputDecoration(hintText: 'Description')
                 ),
               ),
               const SizedBox(
@@ -125,7 +125,8 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 store!.food.category = dropDownValue;
                 store!.food.price = double.parse(priceTextEditing.text);
                 store!.postFood(store!.food);
-              }, icon: Icon(Icons.add_box_rounded))
+              }, icon: const Icon(Icons.add_box_rounded)),
+              
             ],
           ),
         ),

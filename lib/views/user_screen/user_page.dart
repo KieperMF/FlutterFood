@@ -57,15 +57,30 @@ class _UserPageState extends State<UserPage> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PostFoodPage.create()));
-                      },
-                      icon: const Icon(Icons.edit)),
+                  padding: const EdgeInsets.all(24),
+                  child: PopupMenuButton(
+                child: const Icon(Icons.edit_document, size: 32,),
+                onSelected: (value) {
+                  if(value == 'add'){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PostFoodPage.create()));
+                  }
+                },
+                itemBuilder: (BuildContext bc) {
+                  return const [
+                    PopupMenuItem(
+                      value: 'add',
+                      child: Text('Add Food'),
+                    ),
+                    PopupMenuItem(
+                      value: 'edit',
+                      child: Text("Edit Foods"),
+                    ),
+                  ];
+                },
+              ),
                 ),
-              )
+              ),
+              
             ]
           ],
         ),
