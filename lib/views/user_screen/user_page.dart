@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
 import 'package:flutter_food/views/post_food_screen/post_food_page.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
 import 'package:provider/provider.dart';
@@ -59,28 +60,35 @@ class _UserPageState extends State<UserPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: PopupMenuButton(
-                child: const Icon(Icons.edit_document, size: 32,),
-                onSelected: (value) {
-                  if(value == 'add'){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PostFoodPage.create()));
-                  }
-                },
-                itemBuilder: (BuildContext bc) {
-                  return const [
-                    PopupMenuItem(
-                      value: 'add',
-                      child: Text('Add Food'),
+                    onSelected: (value) {
+                      if (value == 'add') {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => PostFoodPage.create()));
+                      } else {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EditFoodPage.create()));
+                      }
+                    },
+                    constraints: const BoxConstraints(maxWidth: 50),
+                    itemBuilder: (BuildContext bc) {
+                      return const [
+                        PopupMenuItem(
+                          value: 'add',
+                          child: Icon(Icons.add),
+                        ),
+                        PopupMenuItem(
+                          value: 'edit',
+                          child: Icon(Icons.edit_note_rounded),
+                        ),
+                      ];
+                    },
+                    child: const Icon(
+                      Icons.edit_document,
+                      size: 32,
                     ),
-                    PopupMenuItem(
-                      value: 'edit',
-                      child: Text("Edit Foods"),
-                    ),
-                  ];
-                },
-              ),
+                  ),
                 ),
               ),
-              
             ]
           ],
         ),

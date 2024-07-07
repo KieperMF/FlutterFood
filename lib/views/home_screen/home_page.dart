@@ -61,10 +61,7 @@ class _HomePageState extends State<HomePage> {
                               loadingBuilder:
                                   (context, child, loadingProgress) {
                                 if (loadingProgress != null) {
-                                  return const Icon(
-                                    Icons.image,
-                                    size: 100,
-                                  );
+                                  return const CircularProgressIndicator();
                                 } else {
                                   return child;
                                 }
