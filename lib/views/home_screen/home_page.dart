@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                               loadingBuilder:
                                   (context, child, loadingProgress) {
                                 if (loadingProgress != null) {
-                                  return const CircularProgressIndicator();
+                                  return const Center(child:  CircularProgressIndicator());
                                 } else {
                                   return child;
                                 }
