@@ -21,4 +21,17 @@ class EditFoodStore with ChangeNotifier{
     visibility[index] = !visibility[index];
     notifyListeners();
   }
+
+  updateFood(String name, String desc, String categ, double price, int index)async{
+    foods[index].name = name.isNotEmpty ? name :  foods[index].name;
+    foods[index].description = desc.isNotEmpty ? desc : foods[index].description;
+    foods[index].category = categ.isNotEmpty ? categ : foods[index].category;
+    foods[index].price = price > 0 ? price : foods[index].price;
+    service.updateFood(foods[index]);
+  }
+
+  deleteFood(int index){
+    service.deleteFood(foods[index]);
+    getFoods();
+  }
 }

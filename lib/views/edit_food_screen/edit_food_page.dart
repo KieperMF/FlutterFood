@@ -53,8 +53,10 @@ class _EditFoodPageState extends State<EditFoodPage> {
       body: SingleChildScrollView(
         child: Center(
             child: SizedBox(
-          height: 350,
+          //height: 350,
           child: ListView.builder(
+              physics:const BouncingScrollPhysics(),
+              shrinkWrap: true,
               itemCount: store!.foods.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -70,15 +72,18 @@ class _EditFoodPageState extends State<EditFoodPage> {
                           child: Row(
                             children: [
                               SizedBox(
-                                  width: 200,
+                                  width: 150,
+                                  height: 100,
                                   child: Image.network(
+                                    cacheWidth: 200,
                                       '${store!.foods[index].foodImage}')),
                               const SizedBox(
                                 width: 20,
                               ),
                               Text(
                                 '${store!.foods[index].name}',
-                                style: const TextStyle(fontSize: 18),
+                                style: const TextStyle(
+                                    fontSize: 18, color: Colors.black),
                               )
                             ],
                           ),
@@ -89,7 +94,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                               border: Border.all(color: Colors.grey),
                               color: const Color.fromRGBO(148, 163, 184, 1)),
                           duration: const Duration(milliseconds: 1500),
-                          height: store!.visibility[index] == true ? 500 : 0,
+                          height: store!.visibility[index] == true ? 300 : 0,
                           curve: Curves.easeInOut,
                           child: store!.visibility[index] == true
                               ? SingleChildScrollView(
@@ -133,7 +138,8 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                           height: 5,
                                         ),
                                         DropdownButton<String>(
-                                          icon: const Icon(Icons.download_rounded),
+                                            icon: const Icon(
+                                                Icons.download_rounded),
                                             value: dropDownValue,
                                             items: store!.categories
                                                 .map<DropdownMenuItem<String>>(
@@ -147,6 +153,41 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                                 dropDownValue = value!;
                                               });
                                             }),
+                                        Row(
+                                          children: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  store!.updateFood(
+                                                      namesController[index]
+                                                          .text,
+                                                      descriptionsController[
+                                                              index]
+                                                          .text,
+                                                      dropDownValue!,
+                                                      double.parse(
+                                                          pricesController[
+                                                                  index]
+                                                              .text),
+                                                      index);
+                                                },
+                                                child: const Text(
+                                                  'Update',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.black),
+                                                )),
+                                            TextButton(
+                                                onPressed: () {
+                                                  store!.deleteFood(index);
+                                                },
+                                                child: const Text(
+                                                  'Delete',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.black),
+                                                )),
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ),
