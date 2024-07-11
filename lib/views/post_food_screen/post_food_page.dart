@@ -21,7 +21,7 @@ class PostFoodPage extends StatefulWidget {
 }
 
 class _PostFoodPageState extends State<PostFoodPage> {
-  PostFoodStore? store; 
+  PostFoodStore? store;
   TextEditingController nameTextEditing = TextEditingController();
   TextEditingController descriptionTextEditing = TextEditingController();
   TextEditingController priceTextEditing = TextEditingController();
@@ -48,7 +48,12 @@ class _PostFoodPageState extends State<PostFoodPage> {
           child: Column(
             children: [
               store!.food.foodImage == null
-                  ? const SizedBox(width: 200, child: Icon(Icons.image, size: 100,))
+                  ? const SizedBox(
+                      width: 200,
+                      child: Icon(
+                        Icons.image,
+                        size: 100,
+                      ))
                   : SizedBox(
                       width: 200,
                       child: Image.network(
@@ -72,65 +77,71 @@ class _PostFoodPageState extends State<PostFoodPage> {
               ),
               const SizedBox(
                 height: 15,
-              ), 
+              ),
               SizedBox(
                 width: 250,
                 child: TextField(
-                  controller: nameTextEditing,
-                  decoration: const InputDecoration(hintText: 'Food Name')
-                  ),
+                    controller: nameTextEditing,
+                    decoration: const InputDecoration(hintText: 'Food Name')),
               ),
               const SizedBox(
                 height: 15,
-              ), 
+              ),
               SizedBox(
                 width: 250,
                 child: TextField(
-                  controller: priceTextEditing,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(hintText: 'Price')
-                ),
+                    controller: priceTextEditing,
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(hintText: 'Price')),
               ),
               const SizedBox(
                 height: 15,
-              ), 
+              ),
               SizedBox(
                 width: 250,
                 child: TextField(
-                  controller: descriptionTextEditing,
-                  decoration: const InputDecoration(hintText: 'Description')
-                ),
+                    controller: descriptionTextEditing,
+                    decoration: const InputDecoration(hintText: 'Description')),
               ),
               const SizedBox(
                 height: 15,
-              ), 
+              ),
               DropdownButton<String>(
-                value: dropDownValue,
-                items: store!.categories.map<DropdownMenuItem<String>>((String value){
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value));
-                }).toList(), 
-                onChanged: (String? value){
-                  setState(() {
-                    dropDownValue = value!;
-                  });
-                }),
-                const SizedBox(
+                  value: dropDownValue,
+                  items: store!.categories
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                        value: value, child: Text(value));
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      dropDownValue = value!;
+                    });
+                  }),
+              const SizedBox(
                 height: 15,
-              ), 
-              IconButton(onPressed: (){
-                store!.food.name = nameTextEditing.text;
-                store!.food.description = descriptionTextEditing.text;
-                store!.food.category = dropDownValue;
-                store!.food.price = double.parse(priceTextEditing.text);
-                store!.postFood(store!.food);
-              }, icon: const Icon(Icons.add_box_rounded)),
-              
+              ),
+              IconButton(
+                  onPressed: () async {
+                    post();
+                    if (store!.postVerif) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Sucess on Add Food')));
+                    }
+                  },
+                  icon: const Icon(Icons.add_box_rounded)),
             ],
           ),
         ),
       ),
     );
+  }
+
+  post() {
+    store!.food.name = nameTextEditing.text;
+    store!.food.description = descriptionTextEditing.text;
+    store!.food.category = dropDownValue;
+    store!.food.price = double.parse(priceTextEditing.text);
+    store!.postFood();
   }
 }

@@ -70,7 +70,7 @@ class _UserPageState extends State<UserPage> {
                       }
                     },
                     constraints: const BoxConstraints(maxWidth: 50),
-                    offset: const Offset(0, -110),
+                    offset: const Offset(10, -115),
                     itemBuilder: (BuildContext bc) {
                       return const [
                         PopupMenuItem(

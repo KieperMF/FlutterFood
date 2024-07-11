@@ -23,18 +23,48 @@ class _GoogleNavBarState extends State<GoogleNavBar> {
           UserPage.create(),
         ],
       ),
-      bottomNavigationBar: GNav(
-        backgroundColor: Colors.grey,
-        tabs: const [
-          GButton(text: 'Home', icon: Icons.home),
-          GButton(text: 'Profile', icon: Icons.person),
-        ],
-        selectedIndex: selectedPage,
-        onTabChange: (value) {
-          setState(() {
-            selectedPage = value;
-          });
-        },
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+            color: Color.fromRGBO(38, 38, 38, 1)),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            child: GNav(
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeIn,
+              backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
+              gap: 8,
+              iconSize: 24,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              tabs: const [
+                GButton(
+                  text: 'Menu',
+                  icon: Icons.menu_book_rounded,
+                  iconColor: Colors.white,
+                  iconActiveColor: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                ),
+                GButton(
+                  text: 'Profile',
+                  icon: Icons.person,
+                  iconActiveColor: Colors.black,
+                  iconColor: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                ),
+              ],
+              selectedIndex: selectedPage,
+              onTabChange: (value) {
+                setState(() {
+                  selectedPage = value;
+                });
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

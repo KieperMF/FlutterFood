@@ -38,42 +38,57 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home'),
         automaticallyImplyLeading: false,
+        backgroundColor:const Color.fromRGBO(255, 255, 255, 1),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 300,
-                child: ListView.builder(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics:const BouncingScrollPhysics(),
                     itemCount: store!.foods.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
                           Container(
                             decoration: BoxDecoration(
+                              color:const Color.fromRGBO(107, 114, 128, 1),
+                                borderRadius: BorderRadius.circular(32),
                                 border: Border.all(color: Colors.grey)),
-                            height: 100,
-                            width: 190,
-                            child: Image.network(
-                              "${store!.foods[index].foodImage}",
-                              cacheWidth: 600,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress != null) {
-                                  return const Center(child:  CircularProgressIndicator());
-                                } else {
-                                  return child;
-                                }
-                              },
+                            height: 170,
+                            width: 180,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(32),
+                              child: Image.network(
+                                fit: BoxFit.cover,
+                                "${store!.foods[index].foodImage}",
+                                cacheWidth: 500,
+                                cacheHeight: 500,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress != null) {
+                                    return const Center(
+                                        child: CircularProgressIndicator(
+                                      color: Colors.red,
+                                    ));
+                                  } else {
+                                    return child;
+                                  }
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Icon(Icons.image_not_supported_rounded, size: 100,);
+                                },
+                              ),
                             ),
                           ),
                           Text('${store!.foods[index].name}'),
                         ],
                       );
                     }),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

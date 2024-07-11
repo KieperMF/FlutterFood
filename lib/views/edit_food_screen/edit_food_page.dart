@@ -75,6 +75,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                   width: 150,
                                   height: 100,
                                   child: Image.network(
+                                    fit: BoxFit.cover,
                                     cacheWidth: 200,
                                       '${store!.foods[index].foodImage}')),
                               const SizedBox(
