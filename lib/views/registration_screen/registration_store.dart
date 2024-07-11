@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/services/user_service.dart';
 
 class RegistrationStore with ChangeNotifier{
-  AuthService? service;
+  UserService? service;
   bool createVerif = false;
   RegistrationStore({this.service});
 

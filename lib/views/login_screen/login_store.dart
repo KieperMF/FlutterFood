@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/services/user_service.dart';
 
 class LoginStore with ChangeNotifier{
   LoginStore({required this.service});
-  AuthService? service;
+  UserService? service;
   bool loginVerif = false;
   
   loginVerification(String email, String password){

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/services/user_service.dart';
 
 class UserStore with ChangeNotifier{
-  AuthService? service;
+  UserService? service;
   User? user;
 
   UserStore({

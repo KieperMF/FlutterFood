@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
 import 'package:flutter_food/views/login_screen/login_store.dart';
 import 'package:flutter_food/views/registration_screen/registration_page.dart';
@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
 
   static Widget create() {
     return ChangeNotifierProvider(
-      create: (_) => LoginStore(service: AuthService()),
+      create: (_) => LoginStore(service: UserService()),
       child: const LoginPage(),
     );
   }

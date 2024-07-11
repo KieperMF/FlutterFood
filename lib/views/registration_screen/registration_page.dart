@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
 import 'package:flutter_food/views/registration_screen/registration_store.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class RegistrationPage extends StatefulWidget {
 
   static Widget create() {
     return ChangeNotifierProvider(
-      create: (_) => RegistrationStore(service: AuthService()),
+      create: (_) => RegistrationStore(service: UserService()),
       child: const RegistrationPage(),
     );
   }

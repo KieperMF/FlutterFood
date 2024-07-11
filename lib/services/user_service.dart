@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class AuthService{
+class UserService{
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
 

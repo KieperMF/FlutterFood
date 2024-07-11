@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/auth_service.dart';
+import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
 import 'package:flutter_food/views/post_food_screen/post_food_page.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
@@ -10,7 +10,7 @@ class UserPage extends StatefulWidget {
 
   static Widget create() {
     return ChangeNotifierProvider(
-      create: (_) => UserStore(service: AuthService()),
+      create: (_) => UserStore(service: UserService()),
       child: const UserPage(),
     );
   }
