@@ -53,7 +53,6 @@ class _EditFoodPageState extends State<EditFoodPage> {
       body: SingleChildScrollView(
         child: Center(
             child: SizedBox(
-          //height: 350,
           child: ListView.builder(
               physics:const BouncingScrollPhysics(),
               shrinkWrap: true,
