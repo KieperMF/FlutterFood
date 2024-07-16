@@ -54,7 +54,7 @@ class _UserPageState extends State<UserPage> {
                     child: Text("${store!.user!.displayName}"))
               ],
             ),
-            if (store!.user!.uid == 'yotJvtOaigbaK0AYG5bHyVuKUvG2') ...[
+            if (store!.user!.uid == 'bp8uHbiLzAOOQvEBm9FTy4uylFt2') ...[
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
@@ -90,7 +90,7 @@ class _UserPageState extends State<UserPage> {
                   ),
                 ),
               ),
-            ]
+            ],
           ],
         ),
       )),

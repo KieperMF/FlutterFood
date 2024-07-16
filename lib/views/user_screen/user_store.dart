@@ -12,6 +12,7 @@ class UserStore with ChangeNotifier{
 
   getUser(){
     user = service!.getUser();
+   //notifyListeners();
   }
 
   logout(){

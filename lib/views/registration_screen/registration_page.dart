@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
-import 'package:flutter_food/views/home_screen/home_page.dart';
+import 'package:flutter_food/views/bottom_navigation_bar.dart';
 import 'package:flutter_food/views/registration_screen/registration_store.dart';
 import 'package:provider/provider.dart';
 
@@ -90,7 +90,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           textPasswordController.text, textNameController.text);
                       if (store!.createVerif) {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomePage.create()));
+                            builder: (context) => const GoogleNavBar()));
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
