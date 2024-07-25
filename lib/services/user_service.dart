@@ -28,7 +28,7 @@ class UserService {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       await userCredential.user!.updateDisplayName(name);
-      await getUser();
+      await getUserUid();
       addUserToCollection();
       debugPrint('sucess create user service');
     } catch (e) {
@@ -59,24 +59,24 @@ class UserService {
     }
   }
 
-  getUSerPhoto() async {
-    userModel.userPic = await storage.ref().getDownloadURL();
-  }
-
   logout() {
     auth.signOut();
   }
 
-  getUser() {
-   user = auth.currentUser;
-   getUserAllInfos();
+  getUserUid() {
+    user = auth.currentUser;
     return user;
   }
 
-  getUserAllInfos(){
-    final response = fireStorage.collection('users').doc(user!.uid);
-    response.get().then((DocumentSnapshot doc) {
+  getUserAllInfos()async{
+    try{
+      final response =  fireStorage.collection('users').doc(user!.uid);
+      await response.get().then((DocumentSnapshot doc) {
       userModel = UserModel.fromJson(doc.data() as Map<String, dynamic>);
     });
+    return userModel;
+    }catch(e){
+      debugPrint('error get user all infos: $e');
+    }
   }
 }

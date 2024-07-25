@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
 import 'package:flutter_food/views/post_food_screen/post_food_page.dart';
+import 'package:flutter_food/views/user_screen/edit_profile_infos.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
 import 'package:provider/provider.dart';
 
@@ -23,10 +24,14 @@ class _UserPageState extends State<UserPage> {
   UserStore? store;
 
   @override
-  void initState() {
-    store = context.read();
-    store!.getUser();
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    store = context.read<UserStore>();
+    load();
+  }
+
+  Future<void> load() async {
+    await store!.getUser();
   }
 
   @override
@@ -47,13 +52,53 @@ class _UserPageState extends State<UserPage> {
           child: Center(
         child: Stack(
           children: [
-            Column(
-              children: [
-                Align(
-                    alignment: Alignment.center,
-                    child: Text("${store!.user!.displayName}"))
-              ],
-            ),
+             SingleChildScrollView(
+                physics:const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: store!.userModel.userPic != null
+                          ? SizedBox(
+                              height: 150,
+                              width: 120,
+                              child: Image.network(
+                                '${store!.userModel.userPic}',
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Icon(
+                                    Icons.image_not_supported_rounded,
+                                    size: 100,
+                                  );
+                                },
+                                fit: BoxFit.cover,
+                              ))
+                          : IconButton(
+                              onPressed: () {
+                                store!.getImageFromGalery();
+                              },
+                              icon: const Icon(
+                                Icons.image,
+                                size: 100,
+                              )),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          store!.userModel.name ?? '',
+                          style: const TextStyle(fontSize: 18, ),
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EditProfileInfos.create()));
+                        },
+                        child: const Text('Edit Profile Infos'))
+                  ],
+                ),
+              ),
             if (store!.user!.uid == 'bp8uHbiLzAOOQvEBm9FTy4uylFt2') ...[
               Align(
                 alignment: Alignment.bottomRight,
