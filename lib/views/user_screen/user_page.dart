@@ -52,43 +52,46 @@ class _UserPageState extends State<UserPage> {
           child: Center(
         child: Stack(
           children: [
-             SingleChildScrollView(
-                physics:const AlwaysScrollableScrollPhysics(),
+            Align(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: store!.userModel.userPic != null
-                          ? SizedBox(
-                              height: 150,
-                              width: 120,
-                              child: Image.network(
-                                '${store!.userModel.userPic}',
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(
-                                    Icons.image_not_supported_rounded,
-                                    size: 100,
-                                  );
-                                },
-                                fit: BoxFit.cover,
-                              ))
-                          : IconButton(
-                              onPressed: () {
-                                store!.getImageFromGalery();
-                              },
-                              icon: const Icon(
-                                Icons.image,
-                                size: 100,
-                              )),
-                    ),
+                    SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: store!.userModel.userPic != null
+                              ? Image.network(
+                                  '${store!.userModel.userPic}',
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(
+                                      Icons.image_not_supported_rounded,
+                                      size: 120,
+                                    );
+                                  },
+                                  fit: BoxFit.cover,
+                                )
+                              : IconButton(
+                                alignment: Alignment.topCenter,
+                                  onPressed: () {
+                                    store!.getImageFromGalery();
+                                  },
+                                  icon: const Icon(
+                                    Icons.image,
+                                    size: 140,
+                                  )),
+                        ),
                     const SizedBox(
                       height: 10,
                     ),
                     Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.topCenter,
                         child: Text(
                           store!.userModel.name ?? '',
-                          style: const TextStyle(fontSize: 18, ),
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
                         )),
                     TextButton(
                         onPressed: () {
@@ -99,6 +102,7 @@ class _UserPageState extends State<UserPage> {
                   ],
                 ),
               ),
+            ),
             if (store!.user!.uid == 'bp8uHbiLzAOOQvEBm9FTy4uylFt2') ...[
               Align(
                 alignment: Alignment.bottomRight,

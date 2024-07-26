@@ -1,5 +1,6 @@
 class UserModel{
   String? name;
+  String? phone;
   String? lastName;
   String? email;
   String? uid;
@@ -12,6 +13,7 @@ class UserModel{
 
   UserModel({
     this.cep,
+    this.phone,
     this.city,
     this.email,
     this.lastName,
@@ -26,6 +28,7 @@ class UserModel{
   Map<String, dynamic> toMap(){
     return{
       'cep' : cep,
+      'phone' : phone,
       'name' : name,
       'lastName': lastName,
       'email' : email,
@@ -40,19 +43,21 @@ class UserModel{
   factory UserModel.fromJson(Map<dynamic, dynamic> json){
     return UserModel(
       cep: json['cep'],
+      phone: json['phone'],
       name: json['name'],
       lastName: json['lastName'],
       street: json['street'],
       city: json['city'],
       email: json['email'],
       neighborhood: json['neighborhood'],
-      state: json['neighborhood'],
+      state: json['state'],
       userPic: json['userPic'],
     );
   }
 
   factory UserModel.fromJsonApiCep(Map<dynamic, dynamic> json){
     return UserModel(
+      cep: json['cep'],
       street: json['logradouro'],
       city: json['localidade'],
       neighborhood: json['bairro'],
