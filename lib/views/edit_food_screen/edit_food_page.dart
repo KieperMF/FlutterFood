@@ -154,6 +154,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                               });
                                             }),
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             TextButton(
                                                 onPressed: () {
