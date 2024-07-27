@@ -21,10 +21,10 @@ class _HomePageState extends State<HomePage> {
   HomeStore? store;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     store = context.read();
     load();
-    super.initState();
+    super.didChangeDependencies();
   }
 
   load() async {
