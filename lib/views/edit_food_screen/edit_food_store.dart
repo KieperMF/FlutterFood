@@ -28,10 +28,17 @@ class EditFoodStore with ChangeNotifier{
     foods[index].category = categ != '' ? categ : foods[index].category;
     foods[index].price = price > 0.0 ? price : foods[index].price;
     service.updateFood(foods[index]);
+    notifyListeners();
   }
 
-  deleteFood(int index){
-    service.deleteFood(foods[index]);
-    getFoods();
+  deleteFood(FoodModel food)async{
+    try{
+      service.deleteFood(food);
+      await getFoods();
+      debugPrint('deleted food store');
+      notifyListeners();
+    }catch(e){
+      debugPrint('error delete food store: $e');
+    }
   }
 }

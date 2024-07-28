@@ -142,6 +142,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                             icon: const Icon(
                                                 Icons.download_rounded),
                                             value: dropDownValue,
+                                            style: const TextStyle(color: Colors.black),
                                             items: store!.categories
                                                 .map<DropdownMenuItem<String>>(
                                                     (String value) {
@@ -180,7 +181,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                                 )),
                                             TextButton(
                                                 onPressed: () {
-                                                  store!.deleteFood(index);
+                                                  store!.deleteFood(store!.foods[index]);
                                                 },
                                                 child: const Text(
                                                   'Delete',

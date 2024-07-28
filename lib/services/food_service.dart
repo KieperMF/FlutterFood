@@ -60,9 +60,12 @@ class FoodService {
     }
   }
 
-  void deleteFood(FoodModel foodSelec){
+  deleteFood(FoodModel foodSelec)async{
     try{
-      firesStore.collection('food').doc('${foodSelec.id}').delete();
+      final ref = firesStore.collection('foods').doc('${foodSelec.id}');
+      ref.delete();
+      storage.ref('food_pic').child('${foodSelec.id}');
+      debugPrint('deleted food');
     }catch(e){
       debugPrint('error delete food: $e');
     }
