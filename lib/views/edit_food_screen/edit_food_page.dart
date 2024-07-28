@@ -51,6 +51,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
         title: const Text('Edit Food'),
       ),
       body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Center(
             child: SizedBox(
           child: ListView.builder(
