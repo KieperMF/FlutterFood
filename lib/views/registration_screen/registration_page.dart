@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/bottom_navigation_bar.dart';
 import 'package:flutter_food/views/registration_screen/registration_store.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -38,6 +39,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Register page'),
+          leading: IconButton(onPressed: (){
+            context.go('/login');
+          }, icon:const Icon(Icons.arrow_back_rounded)),
         ),
         body: Center(
           child: Column(

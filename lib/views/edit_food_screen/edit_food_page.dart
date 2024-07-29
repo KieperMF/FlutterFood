@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/food_service.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_store.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class EditFoodPage extends StatefulWidget {
@@ -49,6 +50,9 @@ class _EditFoodPageState extends State<EditFoodPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Food'),
+        leading: IconButton(onPressed: (){
+            context.go('/');
+          }, icon:const Icon(Icons.arrow_back_rounded)),
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),

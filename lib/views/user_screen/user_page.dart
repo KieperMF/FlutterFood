@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/main.dart';
 import 'package:flutter_food/services/user_service.dart';
-import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
-import 'package:flutter_food/views/post_food_screen/post_food_page.dart';
-import 'package:flutter_food/views/user_screen/edit_profile_infos.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class UserPage extends StatefulWidget {
@@ -43,6 +42,7 @@ class _UserPageState extends State<UserPage> {
           IconButton(
             color: Colors.white,
               onPressed: () {
+                selectedPage = 0;
                 store!.logout();
               },
               icon: const Icon(Icons.logout)),
@@ -65,26 +65,17 @@ class _UserPageState extends State<UserPage> {
                       decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
                       height: 150,
                       width: 150,
-                      child: store!.userModel.userPic != null
-                          ? Image.network(
+                      child:Image.network(
                               '${store!.userModel.userPic}',
                               errorBuilder: (context, error, stackTrace) {
                                 return const Icon(
-                                  Icons.image_not_supported_rounded,
-                                  size: 120,
+                                  Icons.image,
+                                  size: 140,
+                                  color: Colors.white,
                                 );
                               },
                               fit: BoxFit.cover,
                             )
-                          : IconButton(
-                              alignment: Alignment.topCenter,
-                              onPressed: () {
-                                store!.getImageFromGalery();
-                              },
-                              icon: const Icon(
-                                Icons.image,
-                                size: 140,
-                              )),
                     ),
                     const SizedBox(
                       height: 10,
@@ -94,20 +85,21 @@ class _UserPageState extends State<UserPage> {
                         child: Text(
                           store!.userModel.name ?? '',
                           style: const TextStyle(
-                            fontSize: 20,
+                            fontSize: 22,
                             color: Colors.white
                           ),
                         )),
                     const SizedBox(
-                      height: 10,
+                      height: 30,
+                      child: Divider(),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 150,
-                          child: Text(
-                            'State: ${store!.userModel.state}',
+                          width: 180,
+                          child: Text( store!.userModel.state != null ?
+                            'State: ${store!.userModel.state} ' : 'State:' ,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ),
@@ -116,8 +108,8 @@ class _UserPageState extends State<UserPage> {
                         ),
                         SizedBox(
                           width: 150,
-                          child: Text(
-                            'City: ${store!.userModel.city}',
+                          child: Text( store!.userModel.city != null ?
+                            'City: ${store!.userModel.city}' : 'City:',
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ),
@@ -132,9 +124,9 @@ class _UserPageState extends State<UserPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 150,
-                          child: Text(
-                            'Neighborhood: ${store!.userModel.neighborhood}',
+                          width: 180,
+                          child: Text( store!.userModel.neighborhood != null ?
+                            'Neighborhood: ${store!.userModel.neighborhood}' : 'Neighborhood: ',
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ),
@@ -143,8 +135,8 @@ class _UserPageState extends State<UserPage> {
                         ),
                         SizedBox(
                           width: 150,
-                          child: Text(
-                            'Street: ${store!.userModel.street}',
+                          child: Text( store!.userModel.neighborhood != null ?
+                            'Street: ${store!.userModel.street}': 'Street:',
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ),
@@ -159,9 +151,9 @@ class _UserPageState extends State<UserPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 150,
+                          width: 180,
                           child: Text(
-                            store!.userModel.email ?? '',
+                            store!.userModel.email ?? 'Email',
                             style: const TextStyle(
                               fontSize: 20, color: Colors.white
                             ),
@@ -170,20 +162,21 @@ class _UserPageState extends State<UserPage> {
                         const SizedBox(
                           width: 10,
                         ),
-                        ElevatedButton(
-                            style: const ButtonStyle(
-                                backgroundColor:
-                                    WidgetStatePropertyAll(Color.fromRGBO(250, 240, 21, 1))),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditProfileInfos.create()));
-                            },
-                            child: const Text(
-                              'Edit Profile',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                            )),
+                        SizedBox(
+                          width: 150,
+                          child: ElevatedButton(
+                              style: const ButtonStyle(
+                                  backgroundColor:
+                                      WidgetStatePropertyAll(Color.fromRGBO(250, 240, 21, 1))),
+                              onPressed: () {
+                                context.go('/editProfilePage');
+                              },
+                              child: const Text(
+                                'Edit Profile',
+                                style:
+                                    TextStyle(color: Colors.black, fontSize: 18),
+                              )),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -201,11 +194,9 @@ class _UserPageState extends State<UserPage> {
                   child: PopupMenuButton(
                     onSelected: (value) {
                       if (value == 'add') {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PostFoodPage.create()));
+                        context.go('/postFoodPage');
                       } else {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EditFoodPage.create()));
+                        context.go('/editFoodPage');
                       }
                     },
                     constraints: const BoxConstraints(maxWidth: 50),

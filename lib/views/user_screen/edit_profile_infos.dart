@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class EditProfileInfos extends StatefulWidget {
@@ -43,6 +44,9 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit'),
+        leading: IconButton(onPressed: (){
+            context.go('/');
+          }, icon:const Icon(Icons.arrow_back_rounded)),
       ),
       body: RefreshIndicator(
         onRefresh: load,

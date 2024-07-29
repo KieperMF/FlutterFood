@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/main.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
 import 'package:flutter_food/views/user_screen/user_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -11,19 +12,14 @@ class GoogleNavBar extends StatefulWidget {
 }
 
 class _GoogleNavBarState extends State<GoogleNavBar> {
-  int selectedPage = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
         index: selectedPage,
-        children: [
-          HomePage.create(),
-          UserPage.create(),
-        ],
+        children: [HomePage.create(), UserPage.create()],
       ),
-      backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -33,7 +29,7 @@ class _GoogleNavBarState extends State<GoogleNavBar> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: GNav(
-              duration: const Duration(milliseconds: 1000),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.easeIn,
               backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
               gap: 8,

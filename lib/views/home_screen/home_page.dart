@@ -35,16 +35,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     store = context.watch();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        automaticallyImplyLeading: false,
-        backgroundColor:const Color.fromRGBO(255, 255, 255, 1),
-      ),
+      backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
+                const SizedBox(height: 10,),
                 ListView.builder(
                     shrinkWrap: true,
                     physics:const BouncingScrollPhysics(),
@@ -83,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          Text('${store!.foods[index].name}'),
+                          Text('${store!.foods[index].name}', style: TextStyle(color: Colors.white),),
                         ],
                       );
                     }),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/food_service.dart';
 import 'package:flutter_food/views/post_food_screen/post_food_store.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,9 @@ class _PostFoodPageState extends State<PostFoodPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Post Food'),
+        leading: IconButton(onPressed: (){
+            context.go('/');
+          }, icon:const Icon(Icons.arrow_back_rounded)),
       ),
       body: SingleChildScrollView(
         child: Center(
