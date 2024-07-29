@@ -39,15 +39,17 @@ class _UserPageState extends State<UserPage> {
     store = context.watch();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
         actions: [
           IconButton(
+            color: Colors.white,
               onPressed: () {
                 store!.logout();
               },
               icon: const Icon(Icons.logout)),
         ],
+        backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
       ),
+      backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
       body: SafeArea(
           child: Center(
         child: Stack(
@@ -58,47 +60,135 @@ class _UserPageState extends State<UserPage> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
-                    SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: store!.userModel.userPic != null
-                              ? Image.network(
-                                  '${store!.userModel.userPic}',
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return const Icon(
-                                      Icons.image_not_supported_rounded,
-                                      size: 120,
-                                    );
-                                  },
-                                  fit: BoxFit.cover,
-                                )
-                              : IconButton(
-                                alignment: Alignment.topCenter,
-                                  onPressed: () {
-                                    store!.getImageFromGalery();
-                                  },
-                                  icon: const Icon(
-                                    Icons.image,
-                                    size: 140,
-                                  )),
-                        ),
+                    const SizedBox(height: 10,),
+                    Container(
+                      decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+                      height: 150,
+                      width: 150,
+                      child: store!.userModel.userPic != null
+                          ? Image.network(
+                              '${store!.userModel.userPic}',
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(
+                                  Icons.image_not_supported_rounded,
+                                  size: 120,
+                                );
+                              },
+                              fit: BoxFit.cover,
+                            )
+                          : IconButton(
+                              alignment: Alignment.topCenter,
+                              onPressed: () {
+                                store!.getImageFromGalery();
+                              },
+                              icon: const Icon(
+                                Icons.image,
+                                size: 140,
+                              )),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     Align(
-                        alignment: Alignment.topCenter,
+                        alignment: Alignment.center,
                         child: Text(
                           store!.userModel.name ?? '',
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
+                            color: Colors.white
                           ),
                         )),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => EditProfileInfos.create()));
-                        },
-                        child: const Text('Edit Profile Infos'))
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            'State: ${store!.userModel.state}',
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            'City: ${store!.userModel.city}',
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Divider(
+                          thickness: 2,
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            'Neighborhood: ${store!.userModel.neighborhood}',
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            'Street: ${store!.userModel.street}',
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Divider(
+                          thickness: 2,
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            store!.userModel.email ?? '',
+                            style: const TextStyle(
+                              fontSize: 20, color: Colors.white
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    WidgetStatePropertyAll(Color.fromRGBO(250, 240, 21, 1))),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditProfileInfos.create()));
+                            },
+                            child: const Text(
+                              'Edit Profile',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18),
+                            )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -135,6 +225,7 @@ class _UserPageState extends State<UserPage> {
                     child: const Icon(
                       Icons.edit_document,
                       size: 32,
+                      color: Colors.white,
                     ),
                   ),
                 ),

@@ -23,6 +23,7 @@ class _GoogleNavBarState extends State<GoogleNavBar> {
           UserPage.create(),
         ],
       ),
+      backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
