@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/main.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
 import 'package:go_router/go_router.dart';
@@ -42,8 +41,8 @@ class _UserPageState extends State<UserPage> {
           IconButton(
             color: Colors.white,
               onPressed: () {
-                selectedPage = 0;
                 store!.logout();
+                context.go('/');
               },
               icon: const Icon(Icons.logout)),
         ],
@@ -169,7 +168,7 @@ class _UserPageState extends State<UserPage> {
                                   backgroundColor:
                                       WidgetStatePropertyAll(Color.fromRGBO(250, 240, 21, 1))),
                               onPressed: () {
-                                context.go('/editProfilePage');
+                                context.push('/editProfilePage');
                               },
                               child: const Text(
                                 'Edit Profile',
@@ -194,9 +193,9 @@ class _UserPageState extends State<UserPage> {
                   child: PopupMenuButton(
                     onSelected: (value) {
                       if (value == 'add') {
-                        context.go('/postFoodPage');
+                        context.push('/postFoodPage');
                       } else {
-                        context.go('/editFoodPage');
+                        context.push('/editFoodPage');
                       }
                     },
                     constraints: const BoxConstraints(maxWidth: 50),

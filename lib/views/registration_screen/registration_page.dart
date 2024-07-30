@@ -40,7 +40,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         appBar: AppBar(
           title: const Text('Register page'),
           leading: IconButton(onPressed: (){
-            context.go('/login');
+            context.pop();
           }, icon:const Icon(Icons.arrow_back_rounded)),
         ),
         body: Center(

@@ -44,7 +44,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
       appBar: AppBar(
         title: const Text('Post Food'),
         leading: IconButton(onPressed: (){
-            context.go('/');
+            context.pop();
           }, icon:const Icon(Icons.arrow_back_rounded)),
       ),
       body: SingleChildScrollView(

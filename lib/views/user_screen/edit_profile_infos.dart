@@ -45,7 +45,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
       appBar: AppBar(
         title: const Text('Edit'),
         leading: IconButton(onPressed: (){
-            context.go('/');
+            context.pop();
           }, icon:const Icon(Icons.arrow_back_rounded)),
       ),
       body: RefreshIndicator(
