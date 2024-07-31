@@ -35,55 +35,80 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     store = context.watch();
     return Scaffold(
-      backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 10,),
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics:const BouncingScrollPhysics(),
-                    itemCount: store!.foods.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color:const Color.fromRGBO(107, 114, 128, 1),
-                                borderRadius: BorderRadius.circular(32),
-                                border: Border.all(color: Colors.grey)),
-                            height: 170,
-                            width: 180,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(32),
-                              child: Image.network(
-                                fit: BoxFit.cover,
-                                "${store!.foods[index].foodImage}",
-                                cacheWidth: 500,
-                                cacheHeight: 500,
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                  if (loadingProgress != null) {
-                                    return const Center(
-                                        child: CircularProgressIndicator(
-                                      color: Colors.red,
-                                    ));
-                                  } else {
-                                    return child;
-                                  }
-                                },
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.image_not_supported_rounded, size: 100,);
-                                },
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Hamburgers',
+                  style: TextStyle(color: Colors.amberAccent, fontSize: 22),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(store!.foods.length, (index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            if (store!.foods[index].category ==
+                                'Hamburger') ...[
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromRGBO(24, 24, 24, 1),
+                                    borderRadius: BorderRadius.circular(32),
+                                    border: Border.all(color: Colors.amberAccent,width: 2)),
+                                height: 180,
+                                width: 190,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(32),
+                                  child: Image.network(
+                                    fit: BoxFit.cover,
+                                    "${store!.foods[index].foodImage}",
+                                    cacheWidth: 500,
+                                    cacheHeight: 500,
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress != null) {
+                                        return const Center(
+                                            child: CircularProgressIndicator(
+                                          color: Colors.red,
+                                        ));
+                                      } else {
+                                        return child;
+                                      }
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(
+                                        Icons.image_not_supported_rounded,
+                                        size: 100,
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          Text('${store!.foods[index].name}', style: TextStyle(color: Colors.white),),
-                        ],
+                              Text(
+                                '${store!.foods[index].name}',
+                                style: const TextStyle(color: Colors.amberAccent, fontSize: 20),
+                              ),
+                              Text(
+                                '\$ ${store!.foods[index].price}',
+                                style: const TextStyle(color: Colors.amberAccent, fontSize: 20),
+                              ),
+                            ],
+                          ],
+                        ),
                       );
                     }),
+                  ),
+                ),
               ],
             ),
           ),

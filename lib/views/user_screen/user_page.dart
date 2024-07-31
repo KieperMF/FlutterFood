@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
@@ -39,16 +40,16 @@ class _UserPageState extends State<UserPage> {
       appBar: AppBar(
         actions: [
           IconButton(
-            color: Colors.white,
+              color: Colors.white,
               onPressed: () {
                 store!.logout();
                 context.go('/');
               },
               icon: const Icon(Icons.logout)),
         ],
-        backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
+        backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       ),
-      backgroundColor:const Color.fromRGBO(24, 24, 24, 1),
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SafeArea(
           child: Center(
         child: Stack(
@@ -59,23 +60,31 @@ class _UserPageState extends State<UserPage> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
-                    const SizedBox(height: 10,),
-                    Container(
-                      decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
-                      height: 150,
-                      width: 150,
-                      child:Image.network(
-                              '${store!.userModel.userPic}',
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(
-                                  Icons.image,
-                                  size: 140,
-                                  color: Colors.white,
-                                );
-                              },
-                              fit: BoxFit.cover,
-                            )
+                    const SizedBox(
+                      height: 10,
                     ),
+                    Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.amberAccent,
+                            ),
+                            borderRadius: BorderRadius.circular(16)),
+                        height: 150,
+                        width: 170,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.network(
+                            '${store!.userModel.userPic}',
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Icon(
+                                Icons.image,
+                                size: 140,
+                                color: Colors.white,
+                              );
+                            },
+                            fit: BoxFit.cover,
+                          ),
+                        )),
                     const SizedBox(
                       height: 10,
                     ),
@@ -84,22 +93,23 @@ class _UserPageState extends State<UserPage> {
                         child: Text(
                           store!.userModel.name ?? '',
                           style: const TextStyle(
-                            fontSize: 22,
-                            color: Colors.white
-                          ),
+                              fontSize: 22, color: Colors.white),
                         )),
                     const SizedBox(
                       height: 30,
-                      child: Divider(),
+                      child: Divider(thickness: 2,endIndent: 10,indent: 10,),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
                           width: 180,
-                          child: Text( store!.userModel.state != null ?
-                            'State: ${store!.userModel.state} ' : 'State:' ,
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          child: Text(
+                            store!.userModel.state != null
+                                ? 'State: ${store!.userModel.state} '
+                                : 'State:',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
                           ),
                         ),
                         const SizedBox(
@@ -107,9 +117,12 @@ class _UserPageState extends State<UserPage> {
                         ),
                         SizedBox(
                           width: 150,
-                          child: Text( store!.userModel.city != null ?
-                            'City: ${store!.userModel.city}' : 'City:',
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          child: Text(
+                            store!.userModel.city != null
+                                ? 'City: ${store!.userModel.city}'
+                                : 'City:',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
                           ),
                         ),
                       ],
@@ -124,9 +137,12 @@ class _UserPageState extends State<UserPage> {
                       children: [
                         SizedBox(
                           width: 180,
-                          child: Text( store!.userModel.neighborhood != null ?
-                            'Neighborhood: ${store!.userModel.neighborhood}' : 'Neighborhood: ',
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          child: Text(
+                            store!.userModel.neighborhood != null
+                                ? 'Neighborhood: ${store!.userModel.neighborhood}'
+                                : 'Neighborhood: ',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
                           ),
                         ),
                         const SizedBox(
@@ -134,9 +150,12 @@ class _UserPageState extends State<UserPage> {
                         ),
                         SizedBox(
                           width: 150,
-                          child: Text( store!.userModel.neighborhood != null ?
-                            'Street: ${store!.userModel.street}': 'Street:',
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
+                          child: Text(
+                            store!.userModel.neighborhood != null
+                                ? 'Street: ${store!.userModel.street}'
+                                : 'Street:',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
                           ),
                         ),
                       ],
@@ -154,8 +173,7 @@ class _UserPageState extends State<UserPage> {
                           child: Text(
                             store!.userModel.email ?? 'Email',
                             style: const TextStyle(
-                              fontSize: 20, color: Colors.white
-                            ),
+                                fontSize: 20, color: Colors.white),
                           ),
                         ),
                         const SizedBox(
@@ -165,15 +183,15 @@ class _UserPageState extends State<UserPage> {
                           width: 150,
                           child: ElevatedButton(
                               style: const ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStatePropertyAll(Color.fromRGBO(250, 240, 21, 1))),
+                                  backgroundColor: WidgetStatePropertyAll(
+                                      Color.fromRGBO(250, 240, 21, 1))),
                               onPressed: () {
                                 context.push('/editProfilePage');
                               },
                               child: const Text(
                                 'Edit Profile',
-                                style:
-                                    TextStyle(color: Colors.black, fontSize: 18),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
                               )),
                         ),
                         const SizedBox(

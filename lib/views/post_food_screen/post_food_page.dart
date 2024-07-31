@@ -29,7 +29,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
   TextEditingController avaliationTextEditing = TextEditingController();
   TextEditingController categoryTextEditing = TextEditingController();
   TextEditingController idTextEditing = TextEditingController();
-  String dropDownValue = 'Fast Food';
+  String dropDownValue = 'Hamburger';
 
   @override
   void initState() {
