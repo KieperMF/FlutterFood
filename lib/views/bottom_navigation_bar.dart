@@ -8,6 +8,7 @@ class GoogleNavBar extends StatelessWidget {
 
 final StatefulNavigationShell? navigationShell;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
