@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/main.dart';
-import 'package:flutter_food/views/home_screen/home_page.dart';
-import 'package:flutter_food/views/user_screen/user_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class GoogleNavBar extends StatefulWidget {
-  const GoogleNavBar({super.key});
+class GoogleNavBar extends StatelessWidget {
+  const GoogleNavBar({super.key, this.navigationShell});
 
-  @override
-  State<GoogleNavBar> createState() => _GoogleNavBarState();
-}
+final StatefulNavigationShell? navigationShell;
 
-class _GoogleNavBarState extends State<GoogleNavBar> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedPage,
-        children: [HomePage.create(), UserPage.create()],
-      ),
+      body: navigationShell,
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -55,9 +47,7 @@ class _GoogleNavBarState extends State<GoogleNavBar> {
               ],
               selectedIndex: selectedPage,
               onTabChange: (value) {
-                setState(() {
-                  selectedPage = value;
-                });
+                navigationShell!.goBranch(value, initialLocation: value == navigationShell!.currentIndex,);
               },
             ),
           ),

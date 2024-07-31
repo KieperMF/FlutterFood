@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   await store!.loginVerification(
                       textEmailController.text, textPasswordController.text);
                   if (store!.loginVerif) {
-                    context.go('/');
+                    context.go('/home');
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Invalid Credentials'),

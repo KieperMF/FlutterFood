@@ -43,7 +43,7 @@ class _UserPageState extends State<UserPage> {
               color: Colors.white,
               onPressed: () {
                 store!.logout();
-                context.go('/');
+                context.go('/home');
               },
               icon: const Icon(Icons.logout)),
         ],
