@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class GoogleNavBar extends StatelessWidget {
-  const GoogleNavBar({super.key, this.navigationShell});
+class GoogleNavBar extends StatefulWidget {
+  const GoogleNavBar({super.key, required this.child});
 
-final StatefulNavigationShell? navigationShell;
+  final Widget child;
 
+  @override
+  State<GoogleNavBar> createState() => _GoogleNavBarState();
+}
+
+class _GoogleNavBarState extends State<GoogleNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: navigationShell,
+      body: widget.child,
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -46,9 +50,13 @@ final StatefulNavigationShell? navigationShell;
                   backgroundColor: Color.fromRGBO(255, 255, 255, 1),
                 ),
               ],
-              selectedIndex: selectedPage,
-              onTabChange: (value) {
-                navigationShell!.goBranch(value, initialLocation: value == navigationShell!.currentIndex,);
+              selectedIndex: indexSelected,
+              onTabChange: (index) {
+                if(index == 0){
+                  context.go('/home');
+                }else{
+                  context.go('/userPage');
+                }
               },
             ),
           ),
@@ -56,4 +64,6 @@ final StatefulNavigationShell? navigationShell;
       ),
     );
   }
+
+  int get indexSelected=> GoRouter.of(context).routeInformationProvider.value.uri.path.contains('/home')? 0:1;
 }

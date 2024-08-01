@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/bottom_navigation_bar.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
@@ -9,63 +7,65 @@ import 'package:flutter_food/views/post_food_screen/post_food_page.dart';
 import 'package:flutter_food/views/registration_screen/registration_page.dart';
 import 'package:flutter_food/views/user_screen/edit_profile_infos.dart';
 import 'package:flutter_food/views/user_screen/user_page.dart';
+import 'package:flutter_food/widgets/router/router_guarder.dart';
 import 'package:go_router/go_router.dart';
 
-final service = UserService();
+final navigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
   initialLocation: '/home',
-  navigatorKey: _rootNavigatorKey,
+  navigatorKey: navigatorKey,
   routes: [
-    StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) {
-          return StreamBuilder(
-        stream: FirebaseAuth.instance.userChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return GoogleNavBar(navigationShell: navigationShell,);
-          } else {
-            return LoginPage.create();
-          }
-        });
-        },
-        branches: [
-          StatefulShellBranch(routes: [
+    ShellRoute(
+      routes: [
+        ShellRoute(
+          routes: [
             GoRoute(
               path: '/home',
               pageBuilder: (context, state) {
-                return MaterialPage(child: HomePage.create(), fullscreenDialog: true,maintainState: true);
+                return MaterialPage(
+                    child: HomePage.create(),
+                    fullscreenDialog: true,
+                    maintainState: true);
               },
             ),
-          ]),
-          StatefulShellBranch(routes: [
-             GoRoute(
+            GoRoute(
               path: '/userPage',
-              pageBuilder: (context, state) => MaterialPage(child: UserPage.create(), fullscreenDialog: true,maintainState: true),
+              pageBuilder: (context, state) => MaterialPage(
+                  child: UserPage.create(),
+                  fullscreenDialog: true,
+                  maintainState: true),
             ),
-          ])
-        ]),
-    GoRoute(
-      path: '/editProfilePage',
-      pageBuilder: (context, state) => MaterialPage(child: EditProfileInfos.create(), fullscreenDialog: true),
-    ),
-    GoRoute(
-      path: '/editFoodPage',
-      builder: (context, state) => EditFoodPage.create(),
-    ),
-    GoRoute(
-      path: '/registPage',
-      builder: (context, state) => RegistrationPage.create(),
-    ),
-    GoRoute(
-      path: '/postFoodPage',
-      builder: (context, state) => PostFoodPage.create(),
-    ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => LoginPage.create(),
+          ],
+          builder: (context, state, child) => GoogleNavBar(
+            child: child,
+          ),
+        ),
+        GoRoute(
+          path: '/editProfilePage',
+          pageBuilder: (context, state) => MaterialPage(
+              child: EditProfileInfos.create(), fullscreenDialog: true),
+        ),
+        GoRoute(
+          path: '/editFoodPage',
+          builder: (context, state) => EditFoodPage.create(),
+        ),
+        GoRoute(
+          path: '/registPage',
+          builder: (context, state) => RegistrationPage.create(),
+        ),
+        GoRoute(
+          path: '/postFoodPage',
+          builder: (context, state) => PostFoodPage.create(),
+        ),
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => LoginPage.create(),
+        ),
+      ],
+      builder: (context, state, child) {
+        return RouterGuarder.create(child);
+      },
     ),
   ],
 );
-
-final _rootNavigatorKey = GlobalKey<NavigatorState>();

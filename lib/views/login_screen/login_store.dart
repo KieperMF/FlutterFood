@@ -6,7 +6,7 @@ class LoginStore with ChangeNotifier{
   UserService? service;
   bool loginVerif = false;
   
-  loginVerification(String email, String password){
-    loginVerif = service!.loginUser(email, password);
+  loginVerification(String email, String password)async{
+    loginVerif = await service!.loginUser(email, password);
   }
 }

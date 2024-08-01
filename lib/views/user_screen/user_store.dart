@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_food/main.dart';
 import 'package:flutter_food/models/user_model.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,7 +19,6 @@ class UserStore with ChangeNotifier {
   }
 
   logout() {
-    selectedPage = 0;
     service!.logout();
   }
 

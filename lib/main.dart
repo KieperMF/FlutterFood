@@ -22,5 +22,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-int selectedPage = 0;

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
@@ -43,7 +42,6 @@ class _UserPageState extends State<UserPage> {
               color: Colors.white,
               onPressed: () {
                 store!.logout();
-                context.go('/home');
               },
               icon: const Icon(Icons.logout)),
         ],

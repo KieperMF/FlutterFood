@@ -51,7 +51,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
       appBar: AppBar(
         title: const Text('Edit Food'),
         leading: IconButton(onPressed: (){
-            context.go('/');
+            context.pop();
           }, icon:const Icon(Icons.arrow_back_rounded)),
       ),
       body: SingleChildScrollView(
