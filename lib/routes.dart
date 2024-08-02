@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/views/bottom_navigation_bar.dart';
+import 'package:flutter_food/views/home_screen/home.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
 import 'package:flutter_food/views/login_screen/login_page.dart';
@@ -37,9 +37,7 @@ final router = GoRouter(
                   maintainState: true),
             ),
           ],
-          builder: (context, state, child) => GoogleNavBar(
-            child: child,
-          ),
+          builder: (context, state, child,) => const HomeScreen(),
         ),
         GoRoute(
           path: '/editProfilePage',

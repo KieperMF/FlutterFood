@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_food/views/home_screen/home_page.dart';
+import 'package:flutter_food/views/user_screen/user_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class GoogleNavBar extends StatefulWidget {
-  const GoogleNavBar({super.key, required this.child});
-
-  final Widget child;
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, });
 
   @override
-  State<GoogleNavBar> createState() => _GoogleNavBarState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _GoogleNavBarState extends State<GoogleNavBar> {
+class _HomeScreenState extends State<HomeScreen> {
+  List<Widget> children = [HomePage.create(),UserPage.create()];
+
+  final _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
+      body: PageView(
+        onPageChanged: (value) {
+          setState(() {
+            index = value;
+          });
+        },
+        controller: _pageController,
+        children: [
+          HomePage.create(),
+          UserPage.create()
+        ],
+      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -50,13 +67,9 @@ class _GoogleNavBarState extends State<GoogleNavBar> {
                   backgroundColor: Color.fromRGBO(255, 255, 255, 1),
                 ),
               ],
-              selectedIndex: indexSelected,
-              onTabChange: (index) {
-                if(index == 0){
-                  context.go('/home');
-                }else{
-                  context.go('/userPage');
-                }
+              selectedIndex: index,
+              onTabChange: (value) {
+                _pageController.animateToPage(value, duration:const Duration(milliseconds: 400), curve: Curves.ease);
               },
             ),
           ),
@@ -64,6 +77,6 @@ class _GoogleNavBarState extends State<GoogleNavBar> {
       ),
     );
   }
-
-  int get indexSelected=> GoRouter.of(context).routeInformationProvider.value.uri.path.contains('/home')? 0:1;
 }
+
+int index = 0;

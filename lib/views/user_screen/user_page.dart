@@ -18,7 +18,7 @@ class UserPage extends StatefulWidget {
   State<UserPage> createState() => _UserPageState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
   UserStore? store;
 
   @override
@@ -34,6 +34,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     store = context.watch();
     return Scaffold(
       appBar: AppBar(
@@ -242,4 +243,5 @@ class _UserPageState extends State<UserPage> {
       )),
     );
   }
+  bool get wantKeepAlive => true;
 }

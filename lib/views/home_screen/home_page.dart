@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   HomeStore? store;
 
   @override
@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     store = context.watch();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
@@ -116,4 +117,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  bool get wantKeepAlive => true;
 }
