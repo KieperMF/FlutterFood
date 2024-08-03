@@ -49,11 +49,13 @@ class _EditFoodPageState extends State<EditFoodPage> {
     store = context.watch();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Food'),
+        backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
+        title: const Text('Edit Food', style: TextStyle(color: Colors.white),),
         leading: IconButton(onPressed: (){
             context.pop();
-          }, icon:const Icon(Icons.arrow_back_rounded)),
+          }, icon:const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white,)),
       ),
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Center(

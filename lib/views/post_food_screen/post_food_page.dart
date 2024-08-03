@@ -42,11 +42,15 @@ class _PostFoodPageState extends State<PostFoodPage> {
     store = context.watch();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post Food'),
-        leading: IconButton(onPressed: (){
-            context.pop();
-          }, icon:const Icon(Icons.arrow_back_rounded)),
+        title: const Text('Post Food', style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
+        leading: IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white,)),
       ),
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -56,6 +60,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                       width: 200,
                       child: Icon(
                         Icons.image,
+                        color: Colors.white,
                         size: 100,
                       ))
                   : SizedBox(
@@ -70,14 +75,14 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 height: 15,
               ),
               SizedBox(
-                width: 150,
+                width: 170,
                 child: ElevatedButton(
                     onPressed: () async {
                       final respImage = await ImagePicker()
                           .pickImage(source: ImageSource.gallery);
                       store!.getFoodImage(respImage!.path);
                     },
-                    child: const Text('Select image')),
+                    child: const Text('Select image', style: TextStyle(color: Colors.black, fontSize: 20),)),
               ),
               const SizedBox(
                 height: 15,
@@ -86,7 +91,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 width: 250,
                 child: TextField(
                     controller: nameTextEditing,
-                    decoration: const InputDecoration(hintText: 'Food Name')),
+                    decoration: const InputDecoration(hintText: 'Food Name', hintStyle: TextStyle(color: Colors.white))),
               ),
               const SizedBox(
                 height: 15,
@@ -96,7 +101,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 child: TextField(
                     controller: priceTextEditing,
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(hintText: 'Price')),
+                    decoration: const InputDecoration(hintText: 'Price',hintStyle: TextStyle(color: Colors.white))),
               ),
               const SizedBox(
                 height: 15,
@@ -105,13 +110,14 @@ class _PostFoodPageState extends State<PostFoodPage> {
                 width: 250,
                 child: TextField(
                     controller: descriptionTextEditing,
-                    decoration: const InputDecoration(hintText: 'Description')),
+                    decoration: const InputDecoration(hintText: 'Description',hintStyle: TextStyle(color: Colors.white))),
               ),
               const SizedBox(
                 height: 15,
               ),
               DropdownButton<String>(
                   value: dropDownValue,
+                  style: const TextStyle(color: Colors.white),dropdownColor: Colors.black,
                   items: store!.categories
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
@@ -133,7 +139,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                           const SnackBar(content: Text('Sucess on Add Food')));
                     }
                   },
-                  icon: const Icon(Icons.add_box_rounded)),
+                  icon: const Icon(Icons.add_box_rounded, color: Colors.white,)),
             ],
           ),
         ),

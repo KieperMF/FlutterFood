@@ -230,7 +230,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                       ];
                     },
                     child: const Icon(
-                      Icons.edit_document,
+                      Icons.menu,
                       size: 32,
                       color: Colors.white,
                     ),
@@ -243,5 +243,6 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
       )),
     );
   }
+  @override
   bool get wantKeepAlive => true;
 }

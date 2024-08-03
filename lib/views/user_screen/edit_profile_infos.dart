@@ -43,11 +43,13 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
     store = context.watch();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit'),
+        backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
+        title: const Text('Edit', style: TextStyle(color: Colors.white),),
         leading: IconButton(onPressed: (){
             context.pop();
-          }, icon:const Icon(Icons.arrow_back_rounded)),
+          }, icon:const Icon(Icons.arrow_back_ios_new_rounded, color:Colors.white,)),
       ),
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: RefreshIndicator(
         onRefresh: load,
         child: SingleChildScrollView(
@@ -82,10 +84,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                     onPressed: () {
                       store!.getImageFromGalery();
                     },
-                    child: const Text('Change Profile Photo')),
+                    child: const Text('Change Profile Photo',style: TextStyle(color: Colors.white),)),
                 Text(
                   store!.userModel.name ?? '',
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
                 const SizedBox(
                   height: 10,
