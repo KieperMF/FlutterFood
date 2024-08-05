@@ -50,10 +50,18 @@ class _EditFoodPageState extends State<EditFoodPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
-        title: const Text('Edit Food', style: TextStyle(color: Colors.white),),
-        leading: IconButton(onPressed: (){
-            context.pop();
-          }, icon:const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white,)),
+        title: const Text(
+          'Edit Food',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+            )),
       ),
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SingleChildScrollView(
@@ -61,7 +69,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
         child: Center(
             child: SizedBox(
           child: ListView.builder(
-              physics:const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: store!.foods.length,
               itemBuilder: (context, index) {
@@ -81,8 +89,8 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                   width: 150,
                                   height: 100,
                                   child: Image.network(
-                                    fit: BoxFit.cover,
-                                    cacheWidth: 200,
+                                      fit: BoxFit.cover,
+                                      cacheWidth: 200,
                                       '${store!.foods[index].foodImage}')),
                               const SizedBox(
                                 width: 20,
@@ -111,16 +119,18 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                       children: [
                                         TextField(
                                           decoration: InputDecoration(
+                                            hintStyle: const TextStyle(color: Colors.white),
                                               border:
                                                   const OutlineInputBorder(),
                                               hintText:
-                                                  '${store!.foods[index].name}'),
+                                                  '${store!.foods[index].name}',),
                                           controller: namesController[index],
                                         ),
                                         const SizedBox(
                                           height: 5,
                                         ),
                                         TextField(
+                                          
                                           decoration: InputDecoration(
                                               border:
                                                   const OutlineInputBorder(),
@@ -148,7 +158,8 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                             icon: const Icon(
                                                 Icons.download_rounded),
                                             value: dropDownValue,
-                                            style: const TextStyle(color: Colors.black),
+                                            style: const TextStyle(
+                                                color: Colors.black),
                                             items: store!.categories
                                                 .map<DropdownMenuItem<String>>(
                                                     (String value) {
@@ -162,7 +173,8 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                               });
                                             }),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             TextButton(
                                                 onPressed: () {
@@ -187,7 +199,8 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                                 )),
                                             TextButton(
                                                 onPressed: () {
-                                                  store!.deleteFood(store!.foods[index]);
+                                                  store!.deleteFood(
+                                                      store!.foods[index]);
                                                 },
                                                 child: const Text(
                                                   'Delete',

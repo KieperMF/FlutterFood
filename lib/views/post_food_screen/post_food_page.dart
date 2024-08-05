@@ -65,7 +65,9 @@ class _PostFoodPageState extends State<PostFoodPage> {
                       ))
                   : SizedBox(
                       width: 200,
+                      height: 200,
                       child: Image.network(
+                        fit: BoxFit.cover,
                         '${store!.food.foodImage}',
                         errorBuilder: (context, error, stackTrace) {
                           return Image.file(File('${store!.food.foodImage}'));
@@ -90,6 +92,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
               SizedBox(
                 width: 250,
                 child: TextField(
+                  style:const TextStyle(color: Colors.white),
                     controller: nameTextEditing,
                     decoration: const InputDecoration(hintText: 'Food Name', hintStyle: TextStyle(color: Colors.white))),
               ),
@@ -99,6 +102,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
               SizedBox(
                 width: 250,
                 child: TextField(
+                  style:const TextStyle(color: Colors.white),
                     controller: priceTextEditing,
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(hintText: 'Price',hintStyle: TextStyle(color: Colors.white))),
@@ -109,6 +113,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
               SizedBox(
                 width: 250,
                 child: TextField(
+                  style:const TextStyle(color: Colors.white),
                     controller: descriptionTextEditing,
                     decoration: const InputDecoration(hintText: 'Description',hintStyle: TextStyle(color: Colors.white))),
               ),

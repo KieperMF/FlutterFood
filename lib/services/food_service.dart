@@ -14,7 +14,7 @@ class FoodService {
     try {
       foodModel.foodImage =
           await _uploadFoodPic(File('${foodModel.foodImage}'), foodModel);
-      final ref = firesStore.collection('foods').doc(id);
+      final ref = firesStore.collection('foods').doc('${foodModel.name}-$id');
       await ref.set(foodModel.toMap());
     } catch (e) {
       debugPrint('erro post food: $e');
@@ -24,7 +24,7 @@ class FoodService {
   Future _uploadFoodPic(File foodImage, FoodModel food) async {
     try {
       Reference storageReference =
-          FirebaseStorage.instance.ref().child('food_pic').child('${food.id}');
+          FirebaseStorage.instance.ref().child('food_pic').child('${food.name}-${food.id}');
       UploadTask uploadTask = storageReference.putFile(foodImage);
       TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
       String downloadUrl = await taskSnapshot.ref.getDownloadURL();
@@ -54,7 +54,7 @@ class FoodService {
 
   void updateFood(FoodModel foodSelec){
     try{
-      firesStore.collection('foods').doc('${foodSelec.id}').update(foodSelec.toMap());
+      firesStore.collection('foods').doc('${foodSelec.name}-${foodSelec.id}').update(foodSelec.toMap());
     }catch(e){
       debugPrint('error on update food: $e');
     }
@@ -62,9 +62,8 @@ class FoodService {
 
   deleteFood(FoodModel foodSelec)async{
     try{
-      final ref = firesStore.collection('foods').doc('${foodSelec.id}');
-      ref.delete();
-      storage.ref('food_pic').child('${foodSelec.id}');
+      firesStore.collection('foods').doc('${foodSelec.name}-${foodSelec.id}').delete();
+      storage.ref('food_pic').child('${foodSelec.id}').delete();
       debugPrint('deleted food');
     }catch(e){
       debugPrint('error delete food: $e');

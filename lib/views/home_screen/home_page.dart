@@ -19,12 +19,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   HomeStore? store;
-
+  
   @override
-  void didChangeDependencies() {
+  void initState() {
+    super.initState();
     store = context.read();
     load();
-    super.didChangeDependencies();
   }
 
   load() async {
@@ -53,13 +53,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: List.generate(store!.foods.length, (index) {
+                    children: List.generate(store!.hamburger.length, (index) {
                       return Padding(
                         padding: const EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            if (store!.foods[index].category ==
-                                'Hamburger') ...[
                               Container(
                                 decoration: BoxDecoration(
                                     color:
@@ -72,7 +70,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                                   borderRadius: BorderRadius.circular(32),
                                   child: Image.network(
                                     fit: BoxFit.cover,
-                                    "${store!.foods[index].foodImage}",
+                                    "${store!.hamburger[index].foodImage}",
                                     cacheWidth: 500,
                                     cacheHeight: 500,
                                     loadingBuilder:
@@ -96,15 +94,78 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                                 ),
                               ),
                               Text(
-                                '${store!.foods[index].name}',
+                                '${store!.hamburger[index].name}',
                                 style: const TextStyle(color: Colors.amberAccent, fontSize: 20),
                               ),
                               Text(
-                                '\$ ${store!.foods[index].price}',
+                                '\$ ${store!.hamburger[index].price}',
                                 style: const TextStyle(color: Colors.amberAccent, fontSize: 20),
                               ),
                             ],
-                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Drinks',
+                  style: TextStyle(color: Colors.amberAccent, fontSize: 22),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(store!.drinks.length, (index){
+                      return Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromRGBO(24, 24, 24, 1),
+                                    borderRadius: BorderRadius.circular(32),
+                                    border: Border.all(color: Colors.amberAccent,width: 2)),
+                                height: 180,
+                                width: 190,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(32),
+                                  child: Image.network(
+                                    fit: BoxFit.cover,
+                                    "${store!.drinks[index].foodImage}",
+                                    cacheWidth: 500,
+                                    cacheHeight: 500,
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress != null) {
+                                        return const Center(
+                                            child: CircularProgressIndicator(
+                                          color: Colors.red,
+                                        ));
+                                      } else {
+                                        return child;
+                                      }
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(
+                                        Icons.image_not_supported_rounded,
+                                        size: 100,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '${store!.drinks[index].name}',
+                                style: const TextStyle(color: Colors.amberAccent, fontSize: 20),
+                              ),
+                              Text(
+                                '\$ ${store!.drinks[index].price}',
+                                style: const TextStyle(color: Colors.amberAccent, fontSize: 20),
+                              ),
+                            ],
                         ),
                       );
                     }),
