@@ -6,7 +6,7 @@ class EditFoodStore with ChangeNotifier{
   FoodService service;
   List<FoodModel> foods = [];
   List<bool> visibility = [];
-  List<String> categories = ['Fast Food', 'Snack', 'Drink'];
+  List<String> categories = ['Hamburger', 'Meal', 'Drink'];
 
   EditFoodStore({
     required this.service

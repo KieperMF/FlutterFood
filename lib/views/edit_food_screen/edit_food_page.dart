@@ -81,24 +81,48 @@ class _EditFoodPageState extends State<EditFoodPage> {
                         onTap: () => store!.toggleVisibility(index),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: const Color.fromRGBO(148, 163, 184, 1),
-                              border: Border.all(color: Colors.grey)),
+                              color: const Color.fromRGBO(38, 38, 38, 1),
+                              border: Border.all(color: Colors.amberAccent)),
                           child: Row(
                             children: [
-                              SizedBox(
+                              Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.amberAccent)),
                                   width: 150,
                                   height: 100,
                                   child: Image.network(
-                                      fit: BoxFit.cover,
-                                      cacheWidth: 200,
-                                      '${store!.foods[index].foodImage}')),
+                                    fit: BoxFit.cover,
+                                    cacheWidth: 200,
+                                    '${store!.foods[index].foodImage}',
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress != null) {
+                                        return const Icon(
+                                          Icons.image,
+                                          size: 100,
+                                          color: Colors.white,
+                                        );
+                                      } else {
+                                        return child;
+                                      }
+                                    },
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            const Icon(
+                                      Icons.image_not_supported_rounded,
+                                      size: 100,
+                                      color: Colors.white,
+                                    ),
+                                  )),
                               const SizedBox(
                                 width: 20,
                               ),
                               Text(
+                                textScaler: const TextScaler.linear(1.3),
                                 '${store!.foods[index].name}',
                                 style: const TextStyle(
-                                    fontSize: 18, color: Colors.black),
+                                    fontSize: 18, color: Colors.white),
                               )
                             ],
                           ),
@@ -106,112 +130,116 @@ class _EditFoodPageState extends State<EditFoodPage> {
                       ),
                       AnimatedContainer(
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              color: const Color.fromRGBO(148, 163, 184, 1)),
-                          duration: const Duration(milliseconds: 1500),
-                          height: store!.visibility[index] == true ? 300 : 0,
+                              border: Border.all(color: Colors.amberAccent),
+                              color: const Color.fromRGBO(38, 38, 38, 1)),
+                          duration: const Duration(milliseconds: 200),
+                          height: store!.visibility[index] == true
+                              ? MediaQuery.maybeOf(context)!.size.height / 2.8
+                              : 0,
                           curve: Curves.easeInOut,
                           child: store!.visibility[index] == true
-                              ? SingleChildScrollView(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      children: [
-                                        TextField(
-                                          decoration: InputDecoration(
-                                            hintStyle: const TextStyle(color: Colors.white),
-                                              border:
-                                                  const OutlineInputBorder(),
-                                              hintText:
-                                                  '${store!.foods[index].name}',),
-                                          controller: namesController[index],
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        TextField(
-                                          
-                                          decoration: InputDecoration(
-                                              border:
-                                                  const OutlineInputBorder(),
-                                              hintText:
-                                                  '${store!.foods[index].description}'),
-                                          controller:
-                                              descriptionsController[index],
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        TextField(
-                                          keyboardType: TextInputType.phone,
-                                          decoration: InputDecoration(
-                                              border:
-                                                  const OutlineInputBorder(),
-                                              hintText:
-                                                  '${store!.foods[index].price}'),
-                                          controller: pricesController[index],
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        DropdownButton<String>(
-                                            icon: const Icon(
-                                                Icons.download_rounded),
-                                            value: dropDownValue,
-                                            style: const TextStyle(
-                                                color: Colors.black),
-                                            items: store!.categories
-                                                .map<DropdownMenuItem<String>>(
-                                                    (String value) {
-                                              return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value));
-                                            }).toList(),
-                                            onChanged: (String? value) {
-                                              setState(() {
-                                                dropDownValue = value!;
-                                              });
-                                            }),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  store!.updateFood(
-                                                      namesController[index]
-                                                          .text,
-                                                      descriptionsController[
-                                                              index]
-                                                          .text,
-                                                      dropDownValue!,
-                                                      double.parse(
-                                                          pricesController[
-                                                                  index]
-                                                              .text),
-                                                      index);
-                                                },
-                                                child: const Text(
-                                                  'Update',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      color: Colors.black),
-                                                )),
-                                            TextButton(
-                                                onPressed: () {
-                                                  store!.deleteFood(
-                                                      store!.foods[index]);
-                                                },
-                                                child: const Text(
-                                                  'Delete',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      color: Colors.black),
-                                                )),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                              ? Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    children: [
+                                      TextField(
+                                        decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            hintText:
+                                                'Name: ${store!.foods[index].name}',
+                                            hintStyle: const TextStyle(
+                                                color: Colors.white)),
+                                        controller: namesController[index],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextField(
+                                        decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            hintText:
+                                                'Description: ${store!.foods[index].description}',
+                                            hintStyle: const TextStyle(
+                                                color: Colors.white)),
+                                        controller:
+                                            descriptionsController[index],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextField(
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            hintText:
+                                                'Price: ${store!.foods[index].price}',
+                                            hintStyle: const TextStyle(
+                                                color: Colors.white)),
+                                        controller: pricesController[index],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      DropdownButton<String>(
+                                          icon: const Icon(
+                                              color: Colors.white,
+                                              Icons.download_rounded),
+                                          value: dropDownValue,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                          items: store!.categories
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                            return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value));
+                                          }).toList(),
+                                          onChanged: (String? value) {
+                                            setState(() {
+                                              dropDownValue = value!;
+                                            });
+                                          }),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                store!.updateFood(
+                                                    namesController[index].text,
+                                                    descriptionsController[
+                                                            index]
+                                                        .text,
+                                                    dropDownValue!,
+                                                    double.parse(
+                                                        pricesController[index]
+                                                            .text),
+                                                    index);
+                                              },
+                                              child: const Text(
+                                                textScaler:
+                                                    TextScaler.linear(1),
+                                                'Update',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              )),
+                                          TextButton(
+                                              onPressed: () {
+                                                store!.deleteFood(
+                                                    store!.foods[index]);
+                                              },
+                                              child: const Text(
+                                                textScaler:
+                                                    TextScaler.linear(1),
+                                                'Delete',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              )),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 )
                               : null),

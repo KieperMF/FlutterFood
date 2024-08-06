@@ -44,10 +44,18 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
-        title: const Text('Edit', style: TextStyle(color: Colors.white),),
-        leading: IconButton(onPressed: (){
-            context.pop();
-          }, icon:const Icon(Icons.arrow_back_ios_new_rounded, color:Colors.white,)),
+        title: const Text(
+          'Edit',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+            )),
       ),
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: RefreshIndicator(
@@ -58,8 +66,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
             child: Column(
               children: [
                 SizedBox(
-                    height: 150,
-                    width: 120,
+                    height: 160,
+                    width: 160,
                     child: Image.network(
                       '${store!.userModel.userPic}',
                       errorBuilder: (context, error, stackTrace) {
@@ -81,13 +89,19 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       fit: BoxFit.cover,
                     )),
                 TextButton(
+                  style:const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
                     onPressed: () {
                       store!.getImageFromGalery();
                     },
-                    child: const Text('Change Profile Photo',style: TextStyle(color: Colors.white),)),
+                    child: const Text(
+                      'Change Profile Photo',
+                      textScaler: TextScaler.linear(1),
+                      style: TextStyle(color: Colors.black),
+                    )),
                 Text(
+                  textScaler: const TextScaler.linear(1),
                   store!.userModel.name ?? '',
-                  style: const TextStyle(fontSize: 20,color: Colors.white),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 const SizedBox(
                   height: 10,
@@ -204,6 +218,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                               backgroundColor: WidgetStateProperty.all(
                                   const Color.fromRGBO(51, 65, 85, 1))),
                           child: const Text(
+                            textScaler: TextScaler.linear(1),
                             'Search by CEP',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
@@ -257,6 +272,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                                 backgroundColor: WidgetStateProperty.all(
                                     const Color.fromRGBO(51, 65, 85, 1))),
                             child: const Text(
+                              textScaler: TextScaler.linear(1),
                               'UPDATE',
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white),

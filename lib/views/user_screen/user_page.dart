@@ -90,6 +90,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                     Align(
                         alignment: Alignment.center,
                         child: Text(
+                          textScaler: const TextScaler.linear(1),
                           store!.userModel.name ?? '',
                           style: const TextStyle(
                               fontSize: 22, color: Colors.white),
@@ -104,6 +105,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                         SizedBox(
                           width: 180,
                           child: Text(
+                            textScaler: const TextScaler.linear(1),
                             store!.userModel.state != null
                                 ? 'State: ${store!.userModel.state} '
                                 : 'State:',
@@ -117,6 +119,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                         SizedBox(
                           width: 150,
                           child: Text(
+                            textScaler: const TextScaler.linear(1),
                             store!.userModel.city != null
                                 ? 'City: ${store!.userModel.city}'
                                 : 'City:',
@@ -137,6 +140,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                         SizedBox(
                           width: 180,
                           child: Text(
+                            textScaler: const TextScaler.linear(1),
                             store!.userModel.neighborhood != null
                                 ? 'Neighborhood: ${store!.userModel.neighborhood}'
                                 : 'Neighborhood: ',
@@ -150,6 +154,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                         SizedBox(
                           width: 150,
                           child: Text(
+                            textScaler: const TextScaler.linear(1),
                             store!.userModel.neighborhood != null
                                 ? 'Street: ${store!.userModel.street}'
                                 : 'Street:',
@@ -170,6 +175,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                         SizedBox(
                           width: 180,
                           child: Text(
+                            textScaler: const TextScaler.linear(1),
                             store!.userModel.email ?? 'Email',
                             style: const TextStyle(
                                 fontSize: 20, color: Colors.white),
@@ -188,6 +194,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                                 context.push('/editProfilePage');
                               },
                               child: const Text(
+                                textScaler: TextScaler.linear(1),
                                 'Edit Profile',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18),
