@@ -89,7 +89,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       fit: BoxFit.cover,
                     )),
                 TextButton(
-                  style:const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
+                    style: const ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.white)),
                     onPressed: () {
                       store!.getImageFromGalery();
                     },
@@ -110,9 +111,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 180,
+                      width: MediaQuery.maybeOf(context)!.size.width / 2.2,
                       height: 45,
                       child: TextField(
+                        style: const TextStyle(color: Colors.white),
                         controller: stateText,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -127,9 +129,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       width: 10,
                     ),
                     SizedBox(
-                      width: 180,
+                      width: MediaQuery.maybeOf(context)!.size.width / 2.2,
                       height: 45,
                       child: TextField(
+                        style: const TextStyle(color: Colors.white),
                         controller: cityText,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -148,9 +151,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 180,
+                      width: MediaQuery.maybeOf(context)!.size.width / 2.2,
                       height: 45,
                       child: TextField(
+                        style: const TextStyle(color: Colors.white),
                         controller: neighborhoodText,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -166,9 +170,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       width: 10,
                     ),
                     SizedBox(
-                      width: 180,
+                      width: MediaQuery.maybeOf(context)!.size.width / 2.2,
                       height: 45,
                       child: TextField(
+                        style: const TextStyle(color: Colors.white),
                         controller: streetText,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -189,10 +194,11 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: SizedBox(
-                        width: 180,
+                        width: MediaQuery.maybeOf(context)!.size.width / 2.2,
                         height: 45,
                         child: TextField(
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                           controller: cepText,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
@@ -239,9 +245,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: SizedBox(
-                        width: 180,
+                        width: MediaQuery.maybeOf(context)!.size.width / 2.2,
                         height: 45,
                         child: TextField(
+                          style: const TextStyle(color: Colors.white),
                           controller: phoneText,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
