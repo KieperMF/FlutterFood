@@ -32,6 +32,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
     await store!.getFoods();
   }
 
+  refresh() async{
+    await store!.refreshMethod();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -40,7 +44,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () => store!.refreshMethod(),
+          onRefresh: () => refresh(),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Center(

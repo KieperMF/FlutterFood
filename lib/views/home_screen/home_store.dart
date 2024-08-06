@@ -27,16 +27,16 @@ class HomeStore with ChangeNotifier {
     }
   }
 
-  refreshMethod(){
-    getFoods();
-    for (int i = 0; foods.length > i; i++) {
-      if (foods[i].category == 'Hamburger') {
-        if (foods[i].id != hamburger[i].id) {
+  refreshMethod()async{
+    List<FoodModel> food = await service.getFoods();
+    for (int i = 0; food.length > i; i++) {
+      if (food[i].category == 'Hamburger') {
+        if (food[i].id != hamburger[i].id) {
           hamburger.add(foods[i]);
         }
       }
-      if (foods[i].category == 'Drink') {
-        if (foods[i].id != drinks[i].id) {
+      if (food[i].category == 'Drink') {
+        if (food[i].id != drinks[i].id) {
           drinks.add(foods[i]);
         }
       }
