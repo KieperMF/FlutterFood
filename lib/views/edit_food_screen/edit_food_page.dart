@@ -132,9 +132,9 @@ class _EditFoodPageState extends State<EditFoodPage> {
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.amberAccent),
                               color: const Color.fromRGBO(38, 38, 38, 1)),
-                          duration: const Duration(milliseconds: 200),
+                          duration: const Duration(milliseconds: 1000),
                           height: store!.visibility[index] == true
-                              ? MediaQuery.maybeOf(context)!.size.height / 2.8
+                              ? MediaQuery.maybeOf(context)!.size.height / 3
                               : 0,
                           curve: Curves.easeInOut,
                           child: store!.visibility[index] == true
@@ -142,103 +142,128 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                   padding: const EdgeInsets.all(10),
                                   child: Column(
                                     children: [
-                                      TextField(
-                                        style: const TextStyle(color: Colors.white),
-                                        decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            hintText:
-                                                'Name: ${store!.foods[index].name}',
-                                            hintStyle: const TextStyle(
-                                                color: Colors.white)),
-                                        controller: namesController[index],
+                                      Flexible(
+                                        flex: 40,
+                                        child: TextField(
+                                          style: const TextStyle(color: Colors.white, fontSize: 18),
+                                          decoration: InputDecoration(
+                                              border: const OutlineInputBorder(),
+                                              hintText:
+                                                  'Name: ${store!.foods[index].name}',
+                                              hintStyle: const TextStyle(fontSize: 18,
+                                                  color: Colors.white)),
+                                          controller: namesController[index],
+                                        ),
                                       ),
-                                      const SizedBox(
-                                        height: 5,
+                                      const Flexible(
+                                        flex: 5,
+                                        child:  SizedBox(
+                                          height: 5,
+                                        ),
                                       ),
-                                      TextField(
-                                        decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            hintText:
-                                                'Description: ${store!.foods[index].description}',
-                                            hintStyle: const TextStyle(
-                                                color: Colors.white)),
-                                        controller:
-                                            descriptionsController[index],
+                                      Flexible(
+                                        flex: 40,
+                                        child: TextField(style: const TextStyle(fontSize: 18, color: Colors.white),
+                                          decoration: InputDecoration(
+                                              border: const OutlineInputBorder(),
+                                              hintText:
+                                                  'Description: ${store!.foods[index].description}',
+                                              hintStyle: const TextStyle(fontSize: 18,
+                                                  color: Colors.white)),
+                                          controller:
+                                              descriptionsController[index],
+                                        ),
                                       ),
-                                      const SizedBox(
-                                        height: 5,
+                                      const Flexible(
+                                        flex: 10,
+                                        child:  SizedBox(
+                                          height: 5,
+                                        ),
                                       ),
-                                      TextField(
-                                        keyboardType: TextInputType.phone,
-                                        decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            hintText:
-                                                'Price: ${store!.foods[index].price}',
-                                            hintStyle: const TextStyle(
-                                                color: Colors.white)),
-                                        controller: pricesController[index],
+                                      Flexible(
+                                        flex: 40,
+                                        child: TextField(
+                                          style: const TextStyle(fontSize: 18, color: Colors.white),
+                                          keyboardType: TextInputType.phone,
+                                          decoration: InputDecoration(
+                                              border: const OutlineInputBorder(),
+                                              hintText:
+                                                  'Price: ${store!.foods[index].price}',
+                                              hintStyle: const TextStyle(fontSize: 18,
+                                                  color: Colors.white)),
+                                          controller: pricesController[index],
+                                        ),
                                       ),
-                                      const SizedBox(
-                                        height: 5,
+                                      const Flexible(
+                                        flex: 10,
+                                        child:  SizedBox(
+                                          height: 5,
+                                        ),
                                       ),
-                                      DropdownButton<String>(
-                                          icon: const Icon(
-                                              color: Colors.white,
-                                              Icons.download_rounded),
-                                          value: dropDownValue,
-                                          style: const TextStyle(
-                                              color: Colors.white),
-                                          items: store!.categories
-                                              .map<DropdownMenuItem<String>>(
-                                                  (String value) {
-                                            return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(value));
-                                          }).toList(),
-                                          onChanged: (String? value) {
-                                            setState(() {
-                                              dropDownValue = value!;
-                                            });
-                                          }),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          TextButton(
-                                              onPressed: () {
-                                                store!.updateFood(
-                                                    namesController[index].text,
-                                                    descriptionsController[
-                                                            index]
-                                                        .text,
-                                                    dropDownValue!,
-                                                    double.parse(
-                                                        pricesController[index]
-                                                            .text),
-                                                    index);
-                                              },
-                                              child: const Text(
-                                                textScaler:
-                                                    TextScaler.linear(1),
-                                                'Update',
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              )),
-                                          TextButton(
-                                              onPressed: () {
-                                                store!.deleteFood(
-                                                    store!.foods[index]);
-                                              },
-                                              child: const Text(
-                                                textScaler:
-                                                    TextScaler.linear(1),
-                                                'Delete',
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              )),
-                                        ],
+                                      Flexible(
+                                        flex: 40,
+                                        child: DropdownButton<String>(
+                                            icon: const Icon(
+                                                color: Colors.white,
+                                                Icons.download_rounded),
+                                            value: dropDownValue,
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                            items: store!.categories
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value));
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                dropDownValue = value!;
+                                              });
+                                            }),
+                                      ),
+                                      Flexible(
+                                        flex: 50,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                                  onPressed: () {
+                                                    store!.updateFood(
+                                                        namesController[index].text,
+                                                        descriptionsController[
+                                                                index]
+                                                            .text,
+                                                        dropDownValue!,
+                                                        double.parse(
+                                                            pricesController[index]
+                                                                .text),
+                                                        index);
+                                                  },
+                                                  child: const Text(
+                                                    textScaler:
+                                                        TextScaler.linear(1),
+                                                    'Update',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.white),
+                                                  )),
+                                            TextButton(
+                                                  onPressed: () {
+                                                    store!.deleteFood(
+                                                        store!.foods[index]);
+                                                  },
+                                                  child: const Text(
+                                                    textScaler:
+                                                        TextScaler.linear(1),
+                                                    'Delete',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.white),
+                                                  )),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
