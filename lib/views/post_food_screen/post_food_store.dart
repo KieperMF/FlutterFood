@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/models/food_model.dart';
 import 'package:flutter_food/services/food_service.dart';
+import 'package:uuid/uuid.dart';
 
 class PostFoodStore with ChangeNotifier{
   FoodService service;
@@ -15,7 +16,8 @@ class PostFoodStore with ChangeNotifier{
 
   void postFood()async{
     try{
-      await getLength();
+      var uuid = const Uuid();
+      food.id = uuid.v8();
       service.postFood(food);
       postVerif =  true;
       notifyListeners();
@@ -23,11 +25,6 @@ class PostFoodStore with ChangeNotifier{
       debugPrint('error post food: $e');
       postVerif = false;
     }
-  }
-
-  Future<void> getLength()async{
-    List<FoodModel> list = await service.getFoods();
-    food.id = list.length + 1;
   }
 
   void getFoodImage(String path){

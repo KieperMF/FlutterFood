@@ -1,5 +1,5 @@
 class FoodModel {
-  int? id;
+  String? id;
   String? name;
   String? foodImage;
   double? price;

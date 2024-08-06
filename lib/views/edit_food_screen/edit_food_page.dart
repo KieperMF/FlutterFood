@@ -143,6 +143,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                   child: Column(
                                     children: [
                                       TextField(
+                                        style: const TextStyle(color: Colors.white),
                                         decoration: InputDecoration(
                                             border: const OutlineInputBorder(),
                                             hintText:

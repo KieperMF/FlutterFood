@@ -42,7 +42,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
     store = context.watch();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post Food', style: TextStyle(color: Colors.white),),
+        title: const Text('Post Food',textScaler: TextScaler.linear(1), style: TextStyle(color: Colors.white),),
         backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
         leading: IconButton(
             onPressed: () {
@@ -84,7 +84,7 @@ class _PostFoodPageState extends State<PostFoodPage> {
                           .pickImage(source: ImageSource.gallery);
                       store!.getFoodImage(respImage!.path);
                     },
-                    child: const Text('Select image', style: TextStyle(color: Colors.black, fontSize: 20),)),
+                    child: const Text('Select image', textScaler: TextScaler.linear(1),style: TextStyle(color: Colors.black, fontSize: 20),)),
               ),
               const SizedBox(
                 height: 15,
