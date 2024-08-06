@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
       backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () => load(),
+          onRefresh: () => store!.refreshMethod(),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Center(

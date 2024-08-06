@@ -19,6 +19,18 @@ class HomeStore with ChangeNotifier {
   void foodsByCategory(){
     for (int i = 0; foods.length > i; i++) {
       if (foods[i].category == 'Hamburger') {
+          hamburger.add(foods[i]);
+      }
+      if (foods[i].category == 'Drink') {
+          drinks.add(foods[i]);
+      }
+    }
+  }
+
+  refreshMethod(){
+    getFoods();
+    for (int i = 0; foods.length > i; i++) {
+      if (foods[i].category == 'Hamburger') {
         if (foods[i].id != hamburger[i].id) {
           hamburger.add(foods[i]);
         }
@@ -29,5 +41,6 @@ class HomeStore with ChangeNotifier {
         }
       }
     }
+    notifyListeners();
   }
 }
