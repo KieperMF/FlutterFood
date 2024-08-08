@@ -37,13 +37,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     store = context.watch();
     return Scaffold(
+        backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
         appBar: AppBar(
-          title: const Text('Register page'),
+          backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
+          title: const Text(
+            'Register page',
+            textScaler: TextScaler.linear(1.2),
+            style: TextStyle(color: Colors.white),
+          ),
           leading: IconButton(
               onPressed: () {
                 context.go('/login');
               },
-              icon: const Icon(Icons.arrow_back_rounded)),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                  color: Colors.white)),
         ),
         body: Center(
           child: Column(
@@ -53,9 +60,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 width: 300,
                 child: TextField(
                   controller: textNameController,
-                  style: const TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                   decoration: const InputDecoration(
-                      hintStyle: TextStyle(fontSize: 18), hintText: 'Name'),
+                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                      hintStyle: TextStyle(fontSize: 18, color: Colors.white),
+                      hintText: 'Name'),
                 ),
               ),
               const SizedBox(
@@ -65,9 +74,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 width: 300,
                 child: TextField(
                   controller: textEmailController,
-                  style: const TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                   decoration: const InputDecoration(
-                    hintStyle: TextStyle(fontSize: 18),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                    hintStyle: TextStyle(fontSize: 18, color: Colors.white),
                     hintText: 'Email',
                   ),
                 ),
@@ -80,9 +90,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: TextField(
                   obscureText: visibilityPassword,
                   controller: textPasswordController,
-                  style: const TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                   decoration: InputDecoration(
-                      hintStyle: const TextStyle(fontSize: 18),
+                      border: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                      hintStyle:
+                          const TextStyle(fontSize: 18, color: Colors.white),
                       hintText: 'Password',
                       suffixIcon: IconButton(
                           onPressed: () {
@@ -91,14 +103,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             });
                           },
                           icon: visibilityPassword == false
-                              ? const Icon(Icons.visibility_off)
-                              : const Icon(Icons.visibility))),
+                              ? const Icon(
+                                  Icons.visibility,
+                                  color: Colors.white,
+                                )
+                              : const Icon(Icons.visibility_off,
+                                  color: Colors.white))),
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
               TextButton(
+                style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
                   onPressed: () async {
                     if (EmailValidator.validate(textEmailController.text)) {
                       await store!.createVerification(textEmailController.text,
@@ -119,7 +136,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ));
                     }
                   },
-                  child: const Text('Register'))
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(color: Colors.black),
+                    textScaler: TextScaler.linear(1.2),
+                  ))
             ],
           ),
         ));

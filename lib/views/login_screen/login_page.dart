@@ -34,8 +34,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     store = context.watch();
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
       appBar: AppBar(
-        title: const Text('Login'),
+        backgroundColor: const Color.fromRGBO(24, 24, 24, 1),
+        title: const Text(
+          'Login',
+          textScaler: TextScaler.linear(1.2),
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Center(
         child: Column(
@@ -45,9 +51,11 @@ class _LoginPageState extends State<LoginPage> {
               width: 300,
               child: TextField(
                 controller: textEmailController,
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18, color: Colors.white),
+                cursorColor: Colors.white,
                 decoration: const InputDecoration(
-                  hintStyle: TextStyle(fontSize: 18),
+                  border: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                  hintStyle: TextStyle(fontSize: 18, color: Colors.white),
                   hintText: 'Email',
                 ),
               ),
@@ -59,33 +67,51 @@ class _LoginPageState extends State<LoginPage> {
               width: 300,
               child: TextField(
                 controller: textPasswordController,
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18, color: Colors.white),
                 obscureText: store!.passwordVisibility,
+                cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  hintStyle: const TextStyle(fontSize: 18),
-                  hintText: 'Password',
-                  suffixIcon: IconButton(onPressed: (){
-                    setState(() {
-                      store!.passwordVisibility = !store!.passwordVisibility;
-                    });
-                  }, icon: store!.passwordVisibility == false ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility))
-                ),
+                    border: const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+                    hintStyle:
+                        const TextStyle(fontSize: 18, color: Colors.white),
+                    hintText: 'Password',
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            store!.passwordVisibility =
+                                !store!.passwordVisibility;
+                          });
+                        },
+                        icon: store!.passwordVisibility == false
+                            ? const Icon(Icons.visibility, color: Colors.white)
+                            : const Icon(Icons.visibility_off, color: Colors.white))),
                 onSubmitted: (value) => login(),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            TextButton(onPressed: () => login(), 
-            child: const Text('Login')),
+            TextButton(
+              style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
+                onPressed: () => login(),
+                child: const Text(
+                  textScaler: TextScaler.linear(1.2),
+                  'Login',
+                  style: TextStyle(color: Colors.black),
+                )),
             const SizedBox(
               height: 20,
             ),
             TextButton(
+              style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
                 onPressed: () {
                   context.go('/registPage');
                 },
-                child: const Text('Registration page'))
+                child: const Text(
+                  textScaler: TextScaler.linear(1.2),
+                  'Registration page',
+                  style: TextStyle(color: Colors.black),
+                ))
           ],
         ),
       ),
