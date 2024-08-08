@@ -60,29 +60,24 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 controller: textPasswordController,
                 style: const TextStyle(fontSize: 18),
-                decoration: const InputDecoration(
-                  hintStyle: TextStyle(fontSize: 18),
+                obscureText: store!.passwordVisibility,
+                decoration: InputDecoration(
+                  hintStyle: const TextStyle(fontSize: 18),
                   hintText: 'Password',
+                  suffixIcon: IconButton(onPressed: (){
+                    setState(() {
+                      store!.passwordVisibility = !store!.passwordVisibility;
+                    });
+                  }, icon: store!.passwordVisibility == false ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility))
                 ),
+                onSubmitted: (value) => login(),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            TextButton(
-                onPressed: () async {
-                  await store!.loginVerification(
-                      textEmailController.text, textPasswordController.text);
-                  if (store!.loginVerif) {
-                    context.go('/home');
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Invalid Credentials'),
-                      duration: Duration(milliseconds: 1000),
-                    ));
-                  }
-                },
-                child: const Text('Login')),
+            TextButton(onPressed: () => login(), 
+            child: const Text('Login')),
             const SizedBox(
               height: 20,
             ),
@@ -95,5 +90,18 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void login() async {
+    await store!.loginVerification(
+        textEmailController.text, textPasswordController.text);
+    if (store!.loginVerif) {
+      context.go('/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Invalid Credentials'),
+        duration: Duration(milliseconds: 1000),
+      ));
+    }
   }
 }

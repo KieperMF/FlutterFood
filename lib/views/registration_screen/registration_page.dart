@@ -25,6 +25,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController textPasswordController = TextEditingController();
   final bool isValid = false;
   RegistrationStore? store;
+  bool visibilityPassword = true;
 
   @override
   void initState() {
@@ -38,9 +39,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Register page'),
-          leading: IconButton(onPressed: (){
-            context.pop();
-          }, icon:const Icon(Icons.arrow_back_rounded)),
+          leading: IconButton(
+              onPressed: () {
+                context.go('/login');
+              },
+              icon: const Icon(Icons.arrow_back_rounded)),
         ),
         body: Center(
           child: Column(
@@ -75,12 +78,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
               SizedBox(
                 width: 300,
                 child: TextField(
+                  obscureText: visibilityPassword,
                   controller: textPasswordController,
                   style: const TextStyle(fontSize: 18),
-                  decoration: const InputDecoration(
-                    hintStyle: TextStyle(fontSize: 18),
-                    hintText: 'Password',
-                  ),
+                  decoration: InputDecoration(
+                      hintStyle: const TextStyle(fontSize: 18),
+                      hintText: 'Password',
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              visibilityPassword = !visibilityPassword;
+                            });
+                          },
+                          icon: visibilityPassword == false
+                              ? const Icon(Icons.visibility_off)
+                              : const Icon(Icons.visibility))),
                 ),
               ),
               const SizedBox(

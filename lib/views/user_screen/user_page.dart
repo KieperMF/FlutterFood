@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/user_service.dart';
+import 'package:flutter_food/views/home_screen/home.dart';
 import 'package:flutter_food/views/user_screen/user_store.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
               color: Colors.white,
               onPressed: () {
                 store!.logout();
+                pageIndex = 0;
               },
               icon: const Icon(Icons.logout)),
         ],

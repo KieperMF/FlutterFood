@@ -7,9 +7,6 @@ class RegistrationStore with ChangeNotifier{
   RegistrationStore({this.service});
 
   createVerification(String email, String password, String name)async{
-    debugPrint(email);
-      debugPrint(password);
-      debugPrint(name);
     try{
       await service!.createUser(email, password, name);
       createVerif = true;

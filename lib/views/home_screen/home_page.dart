@@ -80,12 +80,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                                     decoration: BoxDecoration(
                                         color:
                                             const Color.fromRGBO(24, 24, 24, 1),
-                                        borderRadius: BorderRadius.circular(32),
+                                        borderRadius: BorderRadius.circular(16),
                                         border: Border.all(color: Colors.amberAccent,width: 2)),
                                     height: 180,
                                     width: 190,
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(32),
+                                      borderRadius: BorderRadius.circular(16),
                                       child: Image.network(
                                         fit: BoxFit.cover,
                                         "${store!.hamburger[index].foodImage}",
@@ -156,14 +156,14 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
                                     decoration: BoxDecoration(
                                         color:
                                             const Color.fromRGBO(24, 24, 24, 1),
-                                        borderRadius: BorderRadius.circular(32),
+                                        borderRadius: BorderRadius.circular(16),
                                         border: Border.all(color: Colors.amberAccent,width: 2)),
                                     height: 180,
                                     width: 190,
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(32),
+                                      borderRadius: BorderRadius.circular(16),
                                       child: Image.network(
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fill,
                                         "${store!.drinks[index].foodImage}",
                                         cacheWidth: 500,
                                         cacheHeight: 500,

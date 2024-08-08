@@ -3,6 +3,8 @@ import 'package:flutter_food/views/home_screen/home_page.dart';
 import 'package:flutter_food/views/user_screen/user_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+int pageIndex = 0;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, });
 
@@ -11,8 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> children = [HomePage.create(),UserPage.create()];
-
   final _pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -25,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         onPageChanged: (value) {
           setState(() {
-            index = value;
+            pageIndex = value;
+            index = pageIndex;
           });
         },
         controller: _pageController,
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundColor: Color.fromRGBO(255, 255, 255, 1),
                 ),
               ],
-              selectedIndex: index,
+              selectedIndex: pageIndex,
               onTabChange: (value) {
                 _pageController.animateToPage(value, duration:const Duration(milliseconds: 400), curve: Curves.ease);
               },
