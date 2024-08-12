@@ -53,55 +53,66 @@ class _HomePageState extends State<HomePage>
             child: Center(
               child: Column(
                 children: [
-                  const SizedBox(height: 10,),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Shimmer.fromColors(
-                        baseColor: Colors.yellow,
-                        highlightColor: Colors.orange,
-                        child: const Text(
-                          textScaler: TextScaler.linear(1.2),
-                          'Top Rateds',
-                          style: TextStyle(
-                              color: Colors.amberAccent, fontSize: 24),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  if (store!.bestRated.isNotEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.yellow,
+                          highlightColor: Colors.orange,
+                          child: const Text(
+                            textScaler: TextScaler.linear(1.2),
+                            'Top Rateds',
+                            style: TextStyle(
+                                color: Colors.amberAccent, fontSize: 24),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxHeight: 250),
-                    child: CarouselView(
-                        itemExtent: 300,
-                        children:
-                            List.generate(store!.bestRated.length, (index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: const Color.fromRGBO(24, 24, 24, 1),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Image.network(
-                              fit: BoxFit.cover,
-                              '${store!.bestRated[index].foodImage}',
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress != null) {
-                                  return const Icon(Icons.image_rounded, size: 150,color: Colors.white,);
-                                } else {
-                                  return child;
-                                }
-                              },
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(
-                                  Icons.image_not_supported_rounded,
-                                  size: 150,
-                                );
-                              },
-                            ),
-                          );
-                        })),
-                  ),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 250),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: CarouselView(
+                            itemExtent: 300,
+                            children:
+                                List.generate(store!.bestRated.length, (index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(24, 24, 24, 1),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Image.network(
+                                  fit: BoxFit.cover,
+                                  '${store!.bestRated[index].foodImage}',
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress != null) {
+                                      return const Icon(
+                                        Icons.image_rounded,
+                                        size: 150,
+                                        color: Colors.white,
+                                      );
+                                    } else {
+                                      return child;
+                                    }
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(
+                                      Icons.image_not_supported_rounded,
+                                      size: 150,
+                                    );
+                                  },
+                                ),
+                              );
+                            })),
+                      ),
+                    ),
+                  ],
                   const SizedBox(
                     height: 10,
                   ),
@@ -134,7 +145,7 @@ class _HomePageState extends State<HomePage>
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color:
-                                          const Color.fromRGBO(24, 24, 24, 1),
+                                          const Color.fromRGBO(38, 38, 38, 1),
                                       borderRadius: BorderRadius.circular(16),
                                       border: Border.all(
                                           color: Colors.amberAccent, width: 2)),
@@ -161,8 +172,11 @@ class _HomePageState extends State<HomePage>
                                                   loadingProgress) {
                                                 if (loadingProgress != null) {
                                                   return const Center(
-                                                      child:
-                                                          Icon(Icons.image_rounded, size: 100,color: Colors.white,));
+                                                      child: Icon(
+                                                    Icons.image_rounded,
+                                                    size: 100,
+                                                    color: Colors.white,
+                                                  ));
                                                 } else {
                                                   return child;
                                                 }
@@ -249,7 +263,7 @@ class _HomePageState extends State<HomePage>
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color:
-                                          const Color.fromRGBO(24, 24, 24, 1),
+                                          const Color.fromRGBO(38, 38, 38, 1),
                                       borderRadius: BorderRadius.circular(16),
                                       border: Border.all(
                                           color: Colors.amberAccent, width: 2)),
@@ -275,8 +289,11 @@ class _HomePageState extends State<HomePage>
                                                   loadingProgress) {
                                                 if (loadingProgress != null) {
                                                   return const Center(
-                                                      child:
-                                                          Icon(Icons.image_rounded, size: 100,color: Colors.white,));
+                                                      child: Icon(
+                                                    Icons.image_rounded,
+                                                    size: 100,
+                                                    color: Colors.white,
+                                                  ));
                                                 } else {
                                                   return child;
                                                 }
