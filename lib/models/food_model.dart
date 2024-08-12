@@ -2,10 +2,10 @@ class FoodModel {
   String? id;
   String? name;
   String? foodImage;
-  double? price;
+  num? price;
   String? description;
   String? category;
-  double? avaliation;
+  num? avaliation;
 
   FoodModel(
       {this.avaliation,
@@ -36,7 +36,7 @@ class FoodModel {
       category: json['category'],
       description: json['description'],
       foodImage: json['foodImage'],
-      price: json['price'],
+      price: json['price'] ,
     );
   }
 }

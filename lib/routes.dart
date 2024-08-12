@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/views/food_screen/food_page.dart';
 import 'package:flutter_food/views/home_screen/home.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
@@ -38,6 +39,11 @@ final router = GoRouter(
             ),
           ],
           builder: (context, state, child,) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: '/foodPage',
+          pageBuilder: (context, state) => const MaterialPage(
+              child: FoodPage(), fullscreenDialog: true),
         ),
         GoRoute(
           path: '/editProfilePage',
