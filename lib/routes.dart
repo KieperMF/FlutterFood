@@ -42,8 +42,8 @@ final router = GoRouter(
         ),
         GoRoute(
           path: '/foodPage',
-          pageBuilder: (context, state) => const MaterialPage(
-              child: FoodPage(), fullscreenDialog: true),
+          pageBuilder: (context, state) => MaterialPage(
+              child: FoodPage.create(), fullscreenDialog: true),
         ),
         GoRoute(
           path: '/editProfilePage',

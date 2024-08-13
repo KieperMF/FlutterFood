@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_food/models/food_model.dart';
 import 'package:flutter_food/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,6 +38,34 @@ class UserService {
       debugPrint('sucess create user service');
     } catch (e) {
       debugPrint('Erro create user service: $e');
+    }
+  }
+
+  addFoodToCart(FoodModel foodCart) async {
+    try {
+      final ref =  fireStorage.collection('usercart-${auth.currentUser!.uid}').doc('${foodCart.id}');
+      await ref.set(foodCart.toMap());
+      debugPrint('food added to cart');
+    } catch (e) {
+      debugPrint('error add user to collection: $e');
+    }
+  }
+
+  getCartFoods()async{
+    try{
+      FoodModel food = FoodModel();
+      List<FoodModel> foods = [];
+      final ref =  fireStorage.collection('usercart-${auth.currentUser!.uid}');
+      await ref.get().then((querySnapshot) {
+        for (var docSnapshot in querySnapshot.docs) {
+          final foodResp = docSnapshot.data() as Map;
+          food = FoodModel.fromJson(foodResp);
+          foods.add(food);
+        }
+      });
+    return foods;
+    }catch(e){
+      debugPrint('error get user all infos: $e');
     }
   }
 
