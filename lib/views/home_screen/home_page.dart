@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/services/food_service.dart';
 import 'package:flutter_food/views/home_screen/home_store.dart';
@@ -73,45 +74,92 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxHeight: 250),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: CarouselView(
-                            itemExtent: 300,
-                            children:
-                                List.generate(store!.bestRated.length, (index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(24, 24, 24, 1),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Image.network(
-                                  fit: BoxFit.cover,
-                                  '${store!.bestRated[index].foodImage}',
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                    if (loadingProgress != null) {
-                                      return const Icon(
-                                        Icons.image_rounded,
-                                        size: 150,
-                                        color: Colors.white,
-                                      );
-                                    } else {
-                                      return child;
-                                    }
-                                  },
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return const Icon(
-                                      Icons.image_not_supported_rounded,
-                                      size: 150,
-                                    );
-                                  },
-                                ),
-                              );
-                            })),
-                      ),
-                    ),
+                    CarouselSlider.builder(
+                        itemCount: store!.bestRated.length,
+                        itemBuilder: (BuildContext context, int index,
+                            int pageViewIndex) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 5,
+                              width: MediaQuery.of(context).size.width / 0.5,
+                              decoration: BoxDecoration(
+                                color: const Color.fromRGBO(38, 38, 38, 1),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 1,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.5,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromRGBO(24, 24, 24, 1),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Image.network(
+                                      fit: BoxFit.cover,
+                                      '${store!.bestRated[index].foodImage}',
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress != null) {
+                                          return const Icon(
+                                            Icons.image_rounded,
+                                            size: 150,
+                                            color: Colors.white,
+                                          );
+                                        } else {
+                                          return child;
+                                        }
+                                      },
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return const Icon(
+                                          Icons.image_not_supported_rounded,
+                                          size: 150,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          textScaler:
+                                              const TextScaler.linear(1),
+                                          '${store!.bestRated[index].name}',
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.yellow,
+                                            ),
+                                            Text(
+                                              '${store!.bestRated[index].avaliation}',
+                                              textScaler:
+                                              const TextScaler.linear(1.2),
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(autoPlay: true,
+                            height: MediaQuery.of(context).size.height / 5))
                   ],
                   const SizedBox(
                     height: 10,

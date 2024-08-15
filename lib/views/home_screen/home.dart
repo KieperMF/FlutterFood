@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/views/cart_screen/cart_page.dart';
 import 'package:flutter_food/views/home_screen/home_page.dart';
 import 'package:flutter_food/views/user_screen/user_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _pageController,
         children: [
           HomePage.create(),
+          CartPage.create(),
           UserPage.create()
         ],
       ),
@@ -54,6 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 GButton(
                   text: 'Menu',
                   icon: Icons.menu_book_rounded,
+                  iconColor: Colors.white,
+                  iconActiveColor: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                  backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                ),
+                GButton(
+                  text: 'Cart',
+                  icon: Icons.shopping_basket,
                   iconColor: Colors.white,
                   iconActiveColor: Colors.black,
                   borderRadius: BorderRadius.all(Radius.circular(24)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/views/cart_screen/cart_page.dart';
 import 'package:flutter_food/views/food_screen/food_page.dart';
 import 'package:flutter_food/views/home_screen/home.dart';
 import 'package:flutter_food/views/edit_food_screen/edit_food_page.dart';
@@ -29,6 +30,13 @@ final router = GoRouter(
                     fullscreenDialog: true,
                     maintainState: true);
               },
+            ),
+            GoRoute(
+              path: '/cartPage',
+              pageBuilder: (context, state) => MaterialPage(
+                  child: CartPage.create(),
+                  fullscreenDialog: true,
+                  maintainState: true),
             ),
             GoRoute(
               path: '/userPage',
