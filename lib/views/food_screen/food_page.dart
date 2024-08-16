@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/services/user_service.dart';
+import 'package:flutter_food/services/cart_service.dart';
 import 'package:flutter_food/views/food_screen/food_page_store.dart';
 import 'package:flutter_food/views/home_screen/home_store.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +10,7 @@ class FoodPage extends StatefulWidget {
 
   static Widget create() {
     return ChangeNotifierProvider(
-      create: (_) => FoodPageStore(service: UserService()),
+      create: (_) => FoodPageStore(service: CartService()),
       child: const FoodPage(),
     );
   }

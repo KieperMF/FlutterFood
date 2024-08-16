@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/models/food_model.dart';
-import 'package:flutter_food/services/user_service.dart';
+import 'package:flutter_food/services/cart_service.dart';
 
 class FoodPageStore with ChangeNotifier{
   FoodPageStore({required this.service});
 
-  UserService service;
+  CartService service;
 
   postFoodCart(FoodModel food)async{
     try{
