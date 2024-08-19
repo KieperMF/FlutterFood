@@ -22,11 +22,13 @@ class EditFoodStore with ChangeNotifier{
     notifyListeners();
   }
 
-  updateFood(String name, String desc, String categ, double price, int index)async{
+  updateFood(String name, String desc, String categ, String price, int index)async{
+    debugPrint('${price.isEmpty}');
+    num priceParsed = price.isNotEmpty ? num.parse(price) : 0;
     foods[index].name = name != '' ? name :  foods[index].name;
     foods[index].description = desc != '' ? desc : foods[index].description;
     foods[index].category = categ != '' ? categ : foods[index].category;
-    foods[index].price = price > 0.0 ? price : foods[index].price;
+    foods[index].price = priceParsed > 0.0 ? priceParsed : foods[index].price;
     service.updateFood(foods[index]);
     notifyListeners();
   }

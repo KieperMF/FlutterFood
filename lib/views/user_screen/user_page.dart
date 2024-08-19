@@ -92,10 +92,9 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                     Align(
                         alignment: Alignment.center,
                         child: Text(
-                          textScaler: const TextScaler.linear(1),
+                          textScaler: const TextScaler.linear(1.7),
                           store!.userModel.name ?? '',
-                          style: const TextStyle(
-                              fontSize: 22, color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         )),
                     const SizedBox(
                       height: 30,

@@ -236,9 +236,9 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                                                 index]
                                                             .text,
                                                         dropDownValue!,
-                                                        double.parse(
-                                                            pricesController[index]
-                                                                .text),
+                                                       pricesController[index]
+                                                                .text,
+                                                            
                                                         index);
                                                   },
                                                   child: const Text(

@@ -139,7 +139,7 @@ class _FoodPageState extends State<FoodPage> {
                         SizedBox(
                             width: MediaQuery.of(context).size.width / 1.2,
                             child: Text(
-                              ' Food description: ${selectedFood!.description}',
+                              'Description: ${selectedFood!.description}',
                               style: const TextStyle(color: Colors.white),
                               textScaler: const TextScaler.linear(1.7),
                             )),

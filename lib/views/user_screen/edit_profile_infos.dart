@@ -66,8 +66,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
             child: Column(
               children: [
                 SizedBox(
-                    height: 160,
-                    width: 160,
+                    height: MediaQuery.of(context).size.height / 6,
+                    width: MediaQuery.of(context).size.width /2.3,
                     child: Image.network(
                       '${store!.userModel.userPic}',
                       errorBuilder: (context, error, stackTrace) {
@@ -88,6 +88,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       },
                       fit: BoxFit.cover,
                     )),
+                    const SizedBox(height: 10,),
                 TextButton(
                     style: const ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.white)),
@@ -100,7 +101,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       style: TextStyle(color: Colors.black),
                     )),
                 Text(
-                  textScaler: const TextScaler.linear(1),
+                  textScaler: const TextScaler.linear(1.2),
                   store!.userModel.name ?? '',
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
@@ -120,7 +121,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                           border: const OutlineInputBorder(),
                           hintText: store!.userModel.state ?? 'State',
                           hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.grey),
+                              const TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -138,7 +139,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                           border: const OutlineInputBorder(),
                           hintText: store!.userModel.city ?? 'City',
                           hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.grey),
+                              const TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -161,7 +162,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                           hintText:
                               store!.userModel.neighborhood ?? 'Neighborhood',
                           hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.grey),
+                              const TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -179,7 +180,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                           border: const OutlineInputBorder(),
                           hintText: store!.userModel.street ?? 'Street',
                           hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.grey),
+                              const TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -205,7 +206,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                             border: OutlineInputBorder(),
                             hintText: 'CEP',
                             hintStyle:
-                                TextStyle(fontSize: 18, color: Colors.grey),
+                                TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ),
                       ),
@@ -254,7 +255,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                             border: OutlineInputBorder(),
                             hintText: 'Phone',
                             hintStyle:
-                                TextStyle(fontSize: 18, color: Colors.grey),
+                                TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ),
                       ),

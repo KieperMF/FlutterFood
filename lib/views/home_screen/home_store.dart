@@ -49,22 +49,26 @@ class HomeStore with ChangeNotifier {
   }
 
   refreshMethod() async {
+    hamburger.clear();
+    drinks.clear();
+    meals.clear();
+    allFoods.clear();
     allFoods = await service.getFoods();
     for (int i = 0; allFoods.length > i; i++) {
       if (allFoods[i].category == 'Hamburger') {
-        if (allFoods[i].id != hamburger[i].id) {
+        //if (allFoods[i].id != hamburger[i].id) {
           hamburger.add(allFoods[i]);
-        }
+        //}
       }
       if (allFoods[i].category == 'Drink') {
-        if (allFoods[i].id != drinks[i].id) {
+        //if (allFoods[i].id != drinks[i].id) {
           drinks.add(allFoods[i]);
-        }
+        //}
       }
       if (allFoods[i].category == 'Meal') {
-        if (allFoods[i].id != meals[i].id) {
+        //if (allFoods[i].id != meals[i].id) {
           meals.add(allFoods[i]);
-        }
+        //}
       }
     }
     notifyListeners();

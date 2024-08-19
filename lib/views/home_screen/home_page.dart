@@ -99,28 +99,31 @@ class _HomePageState extends State<HomePage>
                                           const Color.fromRGBO(24, 24, 24, 1),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      '${store!.bestRated[index].foodImage}',
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                        if (loadingProgress != null) {
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(16),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        '${store!.bestRated[index].foodImage}',
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress != null) {
+                                            return const Icon(
+                                              Icons.image_rounded,
+                                              size: 150,
+                                              color: Colors.white,
+                                            );
+                                          } else {
+                                            return child;
+                                          }
+                                        },
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
                                           return const Icon(
-                                            Icons.image_rounded,
+                                            Icons.image_not_supported_rounded,
                                             size: 150,
-                                            color: Colors.white,
                                           );
-                                        } else {
-                                          return child;
-                                        }
-                                      },
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return const Icon(
-                                          Icons.image_not_supported_rounded,
-                                          size: 150,
-                                        );
-                                      },
+                                        },
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -135,6 +138,7 @@ class _HomePageState extends State<HomePage>
                                               color: Colors.white,
                                               fontSize: 20),
                                         ),
+                                        const SizedBox(height: 5,),
                                         Row(
                                           children: [
                                             const Icon(
@@ -144,11 +148,20 @@ class _HomePageState extends State<HomePage>
                                             Text(
                                               '${store!.bestRated[index].avaliation}',
                                               textScaler:
-                                                  const TextScaler.linear(1.2),
+                                                  const TextScaler.linear(1.5),
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
                                           ],
+                                        ),
+                                        const SizedBox(height: 5,),
+                                        Text(
+                                          textScaler:
+                                              const TextScaler.linear(1),
+                                          '\$${store!.bestRated[index].price}',
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
                                         ),
                                       ],
                                     ),
@@ -159,8 +172,9 @@ class _HomePageState extends State<HomePage>
                           );
                         },
                         options: CarouselOptions(
+                          autoPlayCurve: Curves.easeIn,
                             autoPlayInterval:
-                                const Duration(milliseconds: 2000),
+                                const Duration(seconds: 3),
                             autoPlay: true,
                             height: MediaQuery.of(context).size.height / 5)),
                   ],
@@ -273,7 +287,7 @@ class _HomePageState extends State<HomePage>
                                                 fontSize: 20),
                                           ),
                                         ],
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
