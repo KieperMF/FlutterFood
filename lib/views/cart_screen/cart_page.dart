@@ -45,21 +45,29 @@ class _CartPageState extends State<CartPage>
           style: TextStyle(color: Colors.white),
           textScaler: TextScaler.linear(1.3),
         ),
+        actions: [
+          Text(
+            "Total \$${store!.totalprice}",
+            style: const TextStyle(color: Colors.white),
+            textScaler: const TextScaler.linear(1.5),
+          ),
+        ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: RefreshIndicator(
-            onRefresh: () => store!.getCartProducts(),
+        child: RefreshIndicator(
+          onRefresh: () => store!.refresh(),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 if (store!.cartProducts.isNotEmpty) ...[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 1,
-                    child: ListView.builder(
-                        itemCount: store!.cartProducts.length,
-                        itemBuilder: (context, index) {
-                          return Column(
+                  Column(
+                    children:
+                        List.generate(store!.cartProducts.length, (index) {
+                      return Stack(
+                        children: [
+                          Column(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10),
@@ -104,70 +112,128 @@ class _CartPageState extends State<CartPage>
                                           ),
                                         ),
                                       ),
-                                      Column(
-                                        children: [
-                                          Text(
-                                            '${store!.cartProducts[index].name}',
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                            textScaler:
-                                                const TextScaler.linear(1.3),
-                                          ),
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              '${store!.cartProducts[index].name}',
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                              textScaler:
+                                                  const TextScaler.linear(1.5),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  '\$${store!.cartProducts[index].price}',
+                                                  style: const TextStyle(
+                                                      color: Colors.white),
+                                                  textScaler:
+                                                      const TextScaler.linear(
+                                                          1.3),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                const Icon(
+                                                  Icons.star,
+                                                  color: Colors.yellow,
+                                                  size: 24,
+                                                ),
+                                                Text(
+                                                  '${store!.cartProducts[index].avaliation}',
+                                                  style: const TextStyle(
+                                                      color: Colors.white),
+                                                  textScaler:
+                                                      const TextScaler.linear(
+                                                          1.3),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                      IconButton(
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return AlertDialog(
-                                                    content: const Text(
-                                                      'Remove this food from cart?',
-                                                      textScaler:
-                                                          TextScaler.linear(
-                                                              1.3),
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            store!.deleteFoodFromCart(
-                                                                store!.cartProducts[
-                                                                    index], index);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              'Remove')),
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              'Cancel'))
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete_rounded,
-                                            color: Colors.white,
-                                          ))
                                     ],
                                   ),
                                 ),
                               ),
                             ],
-                          );
-                        }),
-                  ),
+                          ),
+                          Align(
+                            alignment: const Alignment(1, -0.5),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: const Text(
+                                              'Remove this food from cart?',
+                                              textScaler:
+                                                  TextScaler.linear(1.3),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    store!.deleteFoodFromCart(
+                                                        store!.cartProducts[
+                                                            index],
+                                                        index);
+                                                    Navigator.of(context).pop();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                            const SnackBar(
+                                                      content: Text(
+                                                        'Product removed',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                        textScaler:
+                                                            TextScaler.linear(
+                                                                1.5),
+                                                      ),
+                                                      backgroundColor:
+                                                          Color.fromRGBO(
+                                                              39, 39, 42, 1),
+                                                    ));
+                                                  },
+                                                  child: const Text('Remove')),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('Cancel'))
+                                            ],
+                                          );
+                                        });
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete_rounded,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                  )
                 ] else ...[
-                  const Text(
-                    'Cart Empty',
-                    textScaler: TextScaler.linear(1.5),
+                  Center(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: const Text(
+                        'Cart Empty',
+                        style: TextStyle(color: Colors.white),
+                        textScaler: TextScaler.linear(1.5),
+                      ),
+                    ),
                   )
                 ],
               ],
