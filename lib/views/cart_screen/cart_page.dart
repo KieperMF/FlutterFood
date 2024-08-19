@@ -46,10 +46,13 @@ class _CartPageState extends State<CartPage>
           textScaler: TextScaler.linear(1.3),
         ),
         actions: [
-          Text(
-            "Total \$${store!.totalprice}",
-            style: const TextStyle(color: Colors.white),
-            textScaler: const TextScaler.linear(1.5),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Text(
+              "Total \$${store!.totalprice}",
+              style: const TextStyle(color: Colors.white),
+              textScaler: const TextScaler.linear(1.5),
+            ),
           ),
         ],
       ),

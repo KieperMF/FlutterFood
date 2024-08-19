@@ -10,6 +10,7 @@ class HomeStore with ChangeNotifier {
   List<FoodModel> allFoods = [];
   List<FoodModel> hamburger = [];
   List<FoodModel> drinks = [];
+  List<FoodModel> meals = [];
   List<FoodModel> bestRated = [];
 
   getFoods() async {
@@ -28,33 +29,41 @@ class HomeStore with ChangeNotifier {
       if (allFoods[i].category == 'Drink') {
         drinks.add(allFoods[i]);
       }
+      if (allFoods[i].category == 'Meal') {
+        meals.add(allFoods[i]);
+      }
     }
   }
 
   getBestRated() {
     for (int i = 0; allFoods.length > i; i++) {
-      if (allFoods[i].category == 'Hamburger') {
-        if(allFoods[i].avaliation != null){
+      if (allFoods[i].category == 'Hamburger' ||
+          allFoods[i].category == 'Meal') {
+        if (allFoods[i].avaliation != null) {
           if (allFoods[i].avaliation! >= 4.0) {
-          bestRated.add(allFoods[i]);
+            bestRated.add(allFoods[i]);
+          }
         }
-        }
-        
       }
     }
   }
 
   refreshMethod() async {
-    List<FoodModel> food = await service.getFoods();
-    for (int i = 0; food.length > i; i++) {
-      if (food[i].category == 'Hamburger') {
-        if (food[i].id != hamburger[i].id) {
+    allFoods = await service.getFoods();
+    for (int i = 0; allFoods.length > i; i++) {
+      if (allFoods[i].category == 'Hamburger') {
+        if (allFoods[i].id != hamburger[i].id) {
           hamburger.add(allFoods[i]);
         }
       }
-      if (food[i].category == 'Drink') {
-        if (food[i].id != drinks[i].id) {
+      if (allFoods[i].category == 'Drink') {
+        if (allFoods[i].id != drinks[i].id) {
           drinks.add(allFoods[i]);
+        }
+      }
+      if (allFoods[i].category == 'Meal') {
+        if (allFoods[i].id != meals[i].id) {
+          meals.add(allFoods[i]);
         }
       }
     }

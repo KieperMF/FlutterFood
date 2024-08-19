@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage>
                                             Text(
                                               '${store!.bestRated[index].avaliation}',
                                               textScaler:
-                                              const TextScaler.linear(1.2),
+                                                  const TextScaler.linear(1.2),
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -158,8 +158,11 @@ class _HomePageState extends State<HomePage>
                             ),
                           );
                         },
-                        options: CarouselOptions(autoPlay: true,
-                            height: MediaQuery.of(context).size.height / 5))
+                        options: CarouselOptions(
+                            autoPlayInterval:
+                                const Duration(milliseconds: 2000),
+                            autoPlay: true,
+                            height: MediaQuery.of(context).size.height / 5)),
                   ],
                   const SizedBox(
                     height: 10,
@@ -265,6 +268,125 @@ class _HomePageState extends State<HomePage>
                                             textScaler:
                                                 const TextScaler.linear(1),
                                             '\$ ${store!.hamburger[index].price}',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                          ),
+                        )
+                      : const Text(''),
+                  store!.meals.isNotEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.yellow,
+                              highlightColor: Colors.orange,
+                              child: const Text(
+                                textScaler: TextScaler.linear(1.2),
+                                'Meals',
+                                style: TextStyle(
+                                    color: Colors.amberAccent, fontSize: 22),
+                              ),
+                            ),
+                          ),
+                        )
+                      : const Text(''),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  store!.meals.isNotEmpty
+                      ? SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children:
+                                List.generate(store!.meals.length, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromRGBO(38, 38, 38, 1),
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(
+                                          color: Colors.amberAccent, width: 2)),
+                                  child: Column(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          selectedFood = store!.meals[index];
+                                          context.push('/foodPage');
+                                        },
+                                        icon: SizedBox(
+                                          height: 180,
+                                          width: 190,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            child: Image.network(
+                                              fit: BoxFit.cover,
+                                              "${store!.meals[index].foodImage}",
+                                              cacheWidth: 500,
+                                              cacheHeight: 500,
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress != null) {
+                                                  return const Center(
+                                                      child: Icon(
+                                                    Icons.image_rounded,
+                                                    size: 100,
+                                                    color: Colors.white,
+                                                  ));
+                                                } else {
+                                                  return child;
+                                                }
+                                              },
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return const Icon(
+                                                  Icons
+                                                      .image_not_supported_rounded,
+                                                  size: 100,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        textScaler: const TextScaler.linear(1),
+                                        '${store!.meals[index].name}',
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.star,
+                                            color: Colors.yellow,
+                                          ),
+                                          store!.meals[index].avaliation != null
+                                              ? Text(
+                                                  '${store!.meals[index].avaliation}',
+                                                  style: const TextStyle(
+                                                      color: Colors.white),
+                                                )
+                                              : const Text(''),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          Text(
+                                            textScaler:
+                                                const TextScaler.linear(1),
+                                            '\$ ${store!.meals[index].price}',
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20),
