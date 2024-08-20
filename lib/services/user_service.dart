@@ -30,9 +30,6 @@ class UserService {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       await userCredential.user!.updateDisplayName(name);
-      await getUserUid();
-      userModel.name = user!.displayName;
-      userModel.email = user!.email;
       addUserToCollection();
       debugPrint('sucess create user service');
     } catch (e) {
@@ -42,7 +39,10 @@ class UserService {
 
   addUserToCollection() async {
     try {
-      final ref =  fireStorage.collection('users').doc(user!.uid);
+      await getUserUid();
+      userModel.name = user!.displayName;
+      userModel.email = user!.email;
+      final ref = fireStorage.collection('users').doc(user!.uid);
       await ref.set(userModel.toMap());
     } catch (e) {
       debugPrint('error add user to collection: $e');
@@ -69,30 +69,32 @@ class UserService {
     return user;
   }
 
-  getUserAllInfos()async{
-    try{
-      final response =  fireStorage.collection('users').doc(user!.uid);
+  getUserAllInfos() async {
+    try {
+      final response =
+          fireStorage.collection('users').doc(auth.currentUser!.uid);
       await response.get().then((DocumentSnapshot doc) {
-      userModel = UserModel.fromJson(doc.data() as Map<String, dynamic>);
-    });
-    return userModel;
-    }catch(e){
+        userModel = UserModel.fromJson(doc.data() as Map<String, dynamic>);
+      });
+      return userModel;
+    } catch (e) {
       debugPrint('error get user all infos: $e');
     }
   }
 
-  updateUserInfos(UserModel userUpdate)async{
+  updateUserInfos(UserModel userUpdate) async {
     final ref = fireStorage.collection('users').doc(user!.uid);
     ref.update(userUpdate.toMap());
   }
 
-  getLoactionInfosCep(String cep)async{
-    try{
-      final response = await http.get(Uri.parse('https://viacep.com.br/ws/$cep/json/'));
-    final decode = jsonDecode(response.body) as Map;
-    UserModel userModelCep = UserModel.fromJsonApiCep(decode);
-    return userModelCep;
-    }catch(e){
+  getLoactionInfosCep(String cep) async {
+    try {
+      final response =
+          await http.get(Uri.parse('https://viacep.com.br/ws/$cep/json/'));
+      final decode = jsonDecode(response.body) as Map;
+      UserModel userModelCep = UserModel.fromJsonApiCep(decode);
+      return userModelCep;
+    } catch (e) {
       debugPrint('error get cep: $e');
     }
   }
