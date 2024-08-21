@@ -91,27 +91,33 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 20,
             ),
-            TextButton(
-              style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
-                onPressed: () => login(),
-                child: const Text(
-                  textScaler: TextScaler.linear(1.2),
-                  'Login',
-                  style: TextStyle(color: Colors.black),
-                )),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 1.8,
+              child: TextButton(
+                style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white),),
+                  onPressed: () => login(),
+                  child: const Text(
+                    textScaler: TextScaler.linear(1.3),
+                    'Login',
+                    style: TextStyle(color: Colors.black),
+                  )),
+            ),
             const SizedBox(
               height: 20,
             ),
-            TextButton(
-              style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
-                onPressed: () {
-                  context.go('/registPage');
-                },
-                child: const Text(
-                  textScaler: TextScaler.linear(1.2),
-                  'Registration page',
-                  style: TextStyle(color: Colors.black),
-                ))
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 1.8,
+              child: TextButton(
+                style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white)),
+                  onPressed: () {
+                    context.go('/registPage');
+                  },
+                  child: const Text(
+                    textScaler: TextScaler.linear(1.3),
+                    'Registration page',
+                    style: TextStyle(color: Colors.black),
+                  )),
+            )
           ],
         ),
       ),

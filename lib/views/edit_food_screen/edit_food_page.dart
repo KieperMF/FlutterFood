@@ -203,6 +203,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                       Flexible(
                                         flex: 40,
                                         child: DropdownButton<String>(
+                                          dropdownColor: Colors.black,
                                             icon: const Icon(
                                                 color: Colors.white,
                                                 Icons.download_rounded),

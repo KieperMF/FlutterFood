@@ -272,6 +272,7 @@ class _HomePageState extends State<HomePage>
                                           ),
                                           Text(
                                             '${store!.hamburger[index].avaliation}',
+                                            textScaler: const TextScaler.linear(1.5),
                                             style: const TextStyle(
                                                 color: Colors.white),
                                           ),
@@ -390,6 +391,7 @@ class _HomePageState extends State<HomePage>
                                           store!.meals[index].avaliation != null
                                               ? Text(
                                                   '${store!.meals[index].avaliation}',
+                                                  textScaler: const TextScaler.linear(1.5),
                                                   style: const TextStyle(
                                                       color: Colors.white),
                                                 )
@@ -508,6 +510,7 @@ class _HomePageState extends State<HomePage>
                                           ),
                                           Text(
                                             '${store!.drinks[index].avaliation}',
+                                            textScaler: const TextScaler.linear(1.5),
                                             style: const TextStyle(
                                                 color: Colors.white),
                                           ),
@@ -515,8 +518,7 @@ class _HomePageState extends State<HomePage>
                                             width: 15,
                                           ),
                                           Text(
-                                            textScaler:
-                                                const TextScaler.linear(1),
+                                            textScaler: const TextScaler.linear(1.5),
                                             '\$ ${store!.drinks[index].price}',
                                             style: const TextStyle(
                                                 color: Colors.white,

@@ -178,7 +178,64 @@ class _FoodPageState extends State<FoodPage> {
                         width: MediaQuery.of(context).size.width / 6,
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text(
+                                        'Cancel',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaler: TextScaler.linear(1.5),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            content: const Text(
+                                              'Thanks for the prefrerence',
+                                              textScaler:
+                                                  TextScaler.linear(1.4),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text(
+                                                    'OK',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                    textScaler:
+                                                        TextScaler.linear(1.5),
+                                                  ))
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      child: const Text(
+                                        'Confirm',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaler: TextScaler.linear(1.5),
+                                      ),
+                                    ),
+                                  ],
+                                  content: Text(
+                                    'Confirm payment of \$${selectedFood!.price}',
+                                    textScaler: const TextScaler.linear(1.4),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                           style: const ButtonStyle(
                               backgroundColor:
                                   WidgetStatePropertyAll(Colors.amberAccent)),

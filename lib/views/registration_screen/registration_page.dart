@@ -139,7 +139,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: const Text(
                     'Register',
                     style: TextStyle(color: Colors.black),
-                    textScaler: TextScaler.linear(1.2),
+                    textScaler: TextScaler.linear(1.3),
                   ))
             ],
           ),
