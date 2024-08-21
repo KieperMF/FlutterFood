@@ -60,7 +60,8 @@ class _CartPageState extends State<CartPage>
                       padding: const EdgeInsets.only(left: 15),
                       child: Text(
                         "Subtotal \$${store!.totalprice} (${store!.cartProducts.length} items)",
-                        style: const TextStyle(color: Colors.white,fontStyle: FontStyle.italic),
+                        style: const TextStyle(
+                            color: Colors.white, fontStyle: FontStyle.italic),
                         textScaler: const TextScaler.linear(1.5),
                       ),
                     ),
@@ -73,62 +74,61 @@ class _CartPageState extends State<CartPage>
                                 WidgetStatePropertyAll(Colors.yellow)),
                         onPressed: () {
                           showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text(
-                                        'Cancel',
-                                        style: TextStyle(color: Colors.black),
-                                        textScaler: TextScaler.linear(1.5),
-                                      ),
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      'Cancel',
+                                      style: TextStyle(color: Colors.black),
+                                      textScaler: TextScaler.linear(1.5),
                                     ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                            content: const Text(
-                                              'Thanks for the prefrerence',
-                                              textScaler:
-                                                  TextScaler.linear(1.4),
-                                            ),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text(
-                                                    'OK',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                    textScaler:
-                                                        TextScaler.linear(1.5),
-                                                  ))
-                                            ],
-                                          ),
-                                        );
-                                        store!.payment();
-                                      },
-                                      child: const Text(
-                                        'Confirm',
-                                        style: TextStyle(color: Colors.black),
-                                        textScaler: TextScaler.linear(1.5),
-                                      ),
-                                    ),
-                                  ],
-                                  content: Text(
-                                    'Confirm payment of \$${store!.totalprice}',
-                                    textScaler: const TextScaler.linear(1.4),
                                   ),
-                                );
-                              },
-                            );
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          content: const Text(
+                                            'Thanks for the prefrerence',
+                                            textScaler: TextScaler.linear(1.4),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text(
+                                                  'OK',
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                  textScaler:
+                                                      TextScaler.linear(1.5),
+                                                ))
+                                          ],
+                                        ),
+                                      );
+                                      store!.payment();
+                                    },
+                                    child: const Text(
+                                      'Confirm',
+                                      style: TextStyle(color: Colors.black),
+                                      textScaler: TextScaler.linear(1.5),
+                                    ),
+                                  ),
+                                ],
+                                content: Text(
+                                  'Confirm payment of \$${store!.totalprice}',
+                                  textScaler: const TextScaler.linear(1.4),
+                                ),
+                              );
+                            },
+                          );
                         },
                         child: const Text(
                           'Buy',

@@ -19,7 +19,8 @@ class UserPage extends StatefulWidget {
   State<UserPage> createState() => _UserPageState();
 }
 
-class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
+class _UserPageState extends State<UserPage>
+    with AutomaticKeepAliveClientMixin {
   UserStore? store;
 
   @override
@@ -76,6 +77,19 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                           borderRadius: BorderRadius.circular(16),
                           child: Image.network(
                             '${store!.userModel.userPic}',
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress != null) {
+                                return const Center(
+                                  child: Icon(
+                                    Icons.image,
+                                    size: 140,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              } else {
+                                return child;
+                              }
+                            },
                             errorBuilder: (context, error, stackTrace) {
                               return const Icon(
                                 Icons.image,
@@ -98,7 +112,11 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
                         )),
                     const SizedBox(
                       height: 30,
-                      child: Divider(thickness: 2,endIndent: 10,indent: 10,),
+                      child: Divider(
+                        thickness: 2,
+                        endIndent: 10,
+                        indent: 10,
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -251,6 +269,7 @@ class _UserPageState extends State<UserPage> with AutomaticKeepAliveClientMixin{
       )),
     );
   }
+
   @override
   bool get wantKeepAlive => true;
 }
