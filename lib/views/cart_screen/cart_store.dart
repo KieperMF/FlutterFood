@@ -38,4 +38,11 @@ class CartStore with ChangeNotifier {
     getTotalPrice();
     notifyListeners();
   }
+
+  void payment(){
+    service.buyCartProducts(cartProducts);
+    cartProducts.clear();
+    totalprice = 0;
+    notifyListeners();
+  }
 }

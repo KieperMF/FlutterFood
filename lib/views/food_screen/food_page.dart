@@ -158,6 +158,7 @@ class _FoodPageState extends State<FoodPage> {
                             store!.postFoodCart(selectedFood!);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 2000),
                               content: Text(
                                 'Product added to Cart',
                                 style: TextStyle(color: Colors.white),

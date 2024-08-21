@@ -44,4 +44,11 @@ class CartService {
       debugPrint('error get user all infos: $e');
     }
   }
+
+  buyCartProducts(List<FoodModel> cartProducts){
+    final ref = fireStorage.collection('usercart-${auth.currentUser!.uid}');
+    for(int i = 0; i < cartProducts.length; i++){
+      ref.doc(cartProducts[i].id).delete();
+    }
+  }
 }
