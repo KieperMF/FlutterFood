@@ -67,7 +67,7 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
               children: [
                 SizedBox(
                     height: MediaQuery.of(context).size.height / 6,
-                    width: MediaQuery.of(context).size.width /2.3,
+                    width: MediaQuery.of(context).size.width / 2.3,
                     child: Image.network(
                       '${store!.userModel.userPic}',
                       errorBuilder: (context, error, stackTrace) {
@@ -88,7 +88,9 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                       },
                       fit: BoxFit.cover,
                     )),
-                    const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 TextButton(
                     style: const ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(Colors.white)),
@@ -120,8 +122,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           hintText: store!.userModel.state ?? 'State',
-                          hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.white),
+                          hintStyle: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -138,8 +140,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           hintText: store!.userModel.city ?? 'City',
-                          hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.white),
+                          hintStyle: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -161,8 +163,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                           border: const OutlineInputBorder(),
                           hintText:
                               store!.userModel.neighborhood ?? 'Neighborhood',
-                          hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.white),
+                          hintStyle: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -179,8 +181,8 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           hintText: store!.userModel.street ?? 'Street',
-                          hintStyle:
-                              const TextStyle(fontSize: 18, color: Colors.white),
+                          hintStyle: const TextStyle(
+                              fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -275,6 +277,12 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                                   streetText.text,
                                   neighborhoodText.text,
                                   phoneText.text);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Infos Updated', textScaler: TextScaler.linear(1.5),),
+                                duration: Duration(seconds: 2),
+                                dismissDirection: DismissDirection.horizontal,
+                              ));
                             },
                             style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all(
