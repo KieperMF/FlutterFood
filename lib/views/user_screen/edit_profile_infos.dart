@@ -65,35 +65,43 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
           child: Center(
             child: Column(
               children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
+                Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.amberAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(16)),
+                    height: MediaQuery.of(context).size.height / 5,
                     width: MediaQuery.of(context).size.width / 2.3,
-                    child: Image.network(
-                      '${store!.userModel.userPic}',
-                      errorBuilder: (context, error, stackTrace) {
-                        return const Icon(
-                          Icons.image_not_supported_rounded,
-                          size: 100,
-                        );
-                      },
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress != null) {
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        '${store!.userModel.userPic}',
+                        errorBuilder: (context, error, stackTrace) {
                           return const Icon(
-                            Icons.image,
+                            Icons.image_not_supported_rounded,
                             size: 100,
                           );
-                        } else {
-                          return child;
-                        }
-                      },
-                      fit: BoxFit.cover,
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress != null) {
+                            return const Icon(
+                              Icons.image,
+                              size: 100,
+                            );
+                          } else {
+                            return child;
+                          }
+                        },
+                        fit: BoxFit.cover,
+                      ),
                     )),
                 const SizedBox(
                   height: 10,
                 ),
                 TextButton(
                     style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.white)),
+                        backgroundColor: WidgetStatePropertyAll(Colors.yellow)),
                     onPressed: () {
                       store!.getImageFromGalery();
                     },
@@ -279,7 +287,10 @@ class _EditProfileInfosState extends State<EditProfileInfos> {
                                   phoneText.text);
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
-                                content: Text('Infos Updated', textScaler: TextScaler.linear(1.5),),
+                                content: Text(
+                                  'Infos Updated',
+                                  textScaler: TextScaler.linear(1.5),
+                                ),
                                 duration: Duration(seconds: 2),
                                 dismissDirection: DismissDirection.horizontal,
                               ));

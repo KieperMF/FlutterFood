@@ -22,8 +22,8 @@ class _CartPageState extends State<CartPage>
   CartStore? store;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     store = context.read();
     load();
   }
@@ -109,7 +109,7 @@ class _CartPageState extends State<CartPage>
                                                       color: Colors.black),
                                                   textScaler:
                                                       TextScaler.linear(1.5),
-                                                ))
+                                                ),),
                                           ],
                                         ),
                                       );
@@ -261,7 +261,7 @@ class _CartPageState extends State<CartPage>
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
-                                                  child: const Text('Cancel')),
+                                                  child: const Text('Cancel', style: TextStyle(color: Colors.black),)),
                                               TextButton(
                                                   onPressed: () {
                                                     store!.deleteFoodFromCart(
@@ -287,7 +287,7 @@ class _CartPageState extends State<CartPage>
                                                               39, 39, 42, 1),
                                                     ));
                                                   },
-                                                  child: const Text('Remove')),
+                                                  child: const Text('Remove', style: TextStyle(color: Colors.black),)),
                                             ],
                                           );
                                         });

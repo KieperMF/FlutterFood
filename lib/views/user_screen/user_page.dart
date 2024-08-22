@@ -71,8 +71,8 @@ class _UserPageState extends State<UserPage>
                               color: Colors.amberAccent,
                             ),
                             borderRadius: BorderRadius.circular(16)),
-                        height: 150,
-                        width: 170,
+                        height: MediaQuery.of(context).size.height / 5,
+                        width: MediaQuery.of(context).size.width / 2.3,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: Image.network(
