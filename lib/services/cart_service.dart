@@ -9,7 +9,10 @@ class CartService {
 
   addFoodToCart(FoodModel foodCart) async {
     try {
-      final ref =  fireStorage.collection('usercart-${auth.currentUser!.uid}').doc('${foodCart.id}');
+      final ref = fireStorage
+          .collection(
+              'usercart-${auth.currentUser!.displayName}-${auth.currentUser!.uid}')
+          .doc('${foodCart.id}');
       await ref.set(foodCart.toMap());
       debugPrint('food added to cart');
     } catch (e) {
@@ -19,7 +22,10 @@ class CartService {
 
   deleteFoodFromCart(FoodModel foodCart) async {
     try {
-      final ref =  fireStorage.collection('usercart-${auth.currentUser!.uid}').doc('${foodCart.id}');
+      final ref = fireStorage
+          .collection(
+              'usercart-${auth.currentUser!.displayName}-${auth.currentUser!.uid}')
+          .doc('${foodCart.id}');
       await ref.delete();
       debugPrint('sucess on delete food');
     } catch (e) {
@@ -27,11 +33,12 @@ class CartService {
     }
   }
 
-  getCartFoods()async{
-    try{
+  getCartFoods() async {
+    try {
       FoodModel food = FoodModel();
       List<FoodModel> foods = [];
-      final ref =  fireStorage.collection('usercart-${auth.currentUser!.uid}');
+      final ref = fireStorage.collection(
+          'usercart-${auth.currentUser!.displayName}-${auth.currentUser!.uid}');
       await ref.get().then((querySnapshot) {
         for (var docSnapshot in querySnapshot.docs) {
           final foodResp = docSnapshot.data() as Map;
@@ -39,16 +46,26 @@ class CartService {
           foods.add(food);
         }
       });
-    return foods;
-    }catch(e){
+      return foods;
+    } catch (e) {
       debugPrint('error get user all infos: $e');
     }
   }
 
-  buyCartProducts(List<FoodModel> cartProducts){
-    final ref = fireStorage.collection('usercart-${auth.currentUser!.uid}');
-    for(int i = 0; i < cartProducts.length; i++){
+  buyCartProducts(List<FoodModel> cartProducts) {
+    final ref = fireStorage.collection(
+        'usercart-${auth.currentUser!.displayName}-${auth.currentUser!.uid}');
+    for (int i = 0; i < cartProducts.length; i++) {
       ref.doc(cartProducts[i].id).delete();
+    }
+  }
+
+  avaliation(FoodModel food) {
+    try {
+      final ref = fireStorage.collection('foods').doc(food.id);
+      ref.update(food.toMap());
+    } catch (e) {
+      debugPrint('error on avaliate: $e');
     }
   }
 }

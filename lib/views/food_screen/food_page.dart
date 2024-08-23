@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food/services/cart_service.dart';
 import 'package:flutter_food/views/food_screen/food_page_store.dart';
 import 'package:flutter_food/views/home_screen/home_store.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
   FoodPageStore? store;
+  double rating = 2;
 
   @override
   void initState() {
@@ -143,6 +145,83 @@ class _FoodPageState extends State<FoodPage> {
                               style: const TextStyle(color: Colors.white),
                               textScaler: const TextScaler.linear(1.7),
                             )),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: const Alignment(-0.7, 0),
+                          child: RatingStars(
+                            value: rating,
+                            onValueChanged: (v) {
+                              setState(() {
+                                rating = v;
+                                debugPrint('$rating');
+                              });
+                            },
+                            starBuilder: (index, color) => Icon(
+                              Icons.star,
+                              color: color,
+                            ),
+                            starCount: 5,
+                            starSize: 30,
+                            valueLabelColor: const Color(0xff9b9b9b),
+                            valueLabelTextStyle: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 16),
+                            valueLabelRadius: 10,
+                            maxValue: 5,
+                            starSpacing: 2,
+                            maxValueVisibility: true,
+                            valueLabelVisibility: true,
+                            animationDuration:
+                                const Duration(milliseconds: 1500),
+                            valueLabelPadding: const EdgeInsets.symmetric(
+                                vertical: 1, horizontal: 8),
+                            valueLabelMargin: const EdgeInsets.only(right: 8),
+                            starOffColor: const Color(0xffe7e8ea),
+                            starColor: Colors.yellow,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: const Alignment(-0.8, 0),
+                          child: TextButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    content: Text(
+                                        'Do you want to rate the product $rating stars?'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Cancel')),
+                                      TextButton(
+                                          onPressed: () {
+                                            store!.evaluateProduct(
+                                                rating, selectedFood!);
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Evaluate')),
+                                    ],
+                                  ),
+                                );
+                              },
+                              style: const ButtonStyle(
+                                  backgroundColor:
+                                      WidgetStatePropertyAll(Colors.yellow)),
+                              child: const Text(
+                                'Evaluate Product',
+                                style: TextStyle(color: Colors.black),
+                                textScaler: TextScaler.linear(1.3),
+                              )),
+                        )
                       ],
                     ),
                   ),
@@ -152,99 +231,107 @@ class _FoodPageState extends State<FoodPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(
-                          onPressed: () {
-                            selectedFood!;
-                            store!.postFoodCart(selectedFood!);
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                                  duration: Duration(milliseconds: 2000),
-                              content: Text(
-                                'Product added to Cart',
-                                style: TextStyle(color: Colors.white),
-                                textScaler: TextScaler.linear(1.5),
-                              ),
-                              backgroundColor: Color.fromRGBO(39, 39, 42, 1),
-                            ));
-                          },
-                          style: const ButtonStyle(
-                              backgroundColor:
-                                  WidgetStatePropertyAll(Colors.amberAccent)),
-                          child: const Text(
-                            'Add to Cart',
-                            textScaler: TextScaler.linear(1.5),
-                            style: TextStyle(color: Colors.black),
-                          )),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: TextButton(
+                            onPressed: () {
+                              selectedFood!;
+                              store!.postFoodCart(selectedFood!);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                duration: Duration(milliseconds: 2000),
+                                content: Text(
+                                  'Product added to Cart',
+                                  style: TextStyle(color: Colors.white),
+                                  textScaler: TextScaler.linear(1.5),
+                                ),
+                                backgroundColor: Color.fromRGBO(39, 39, 42, 1),
+                              ));
+                            },
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    WidgetStatePropertyAll(Colors.amberAccent)),
+                            child: const Text(
+                              'Add to Cart',
+                              textScaler: TextScaler.linear(1.5),
+                              style: TextStyle(color: Colors.black),
+                            )),
+                      ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 6,
                       ),
-                      TextButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text(
-                                        'Cancel',
-                                        style: TextStyle(color: Colors.black),
-                                        textScaler: TextScaler.linear(1.5),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: TextButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'Cancel',
+                                          style: TextStyle(color: Colors.black),
+                                          textScaler: TextScaler.linear(1.5),
+                                        ),
                                       ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                            content: const Text(
-                                              'Thanks for the prefrerence',
-                                              textScaler:
-                                                  TextScaler.linear(1.4),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              content: const Text(
+                                                'Thanks for the prefrerence',
+                                                textScaler:
+                                                    TextScaler.linear(1.4),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text(
+                                                      'OK',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                      textScaler:
+                                                          TextScaler.linear(
+                                                              1.5),
+                                                    ))
+                                              ],
                                             ),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text(
-                                                    'OK',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                    textScaler:
-                                                        TextScaler.linear(1.5),
-                                                  ))
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                      child: const Text(
-                                        'Confirm',
-                                        style: TextStyle(color: Colors.black),
-                                        textScaler: TextScaler.linear(1.5),
+                                          );
+                                        },
+                                        child: const Text(
+                                          'Confirm',
+                                          style: TextStyle(color: Colors.black),
+                                          textScaler: TextScaler.linear(1.5),
+                                        ),
                                       ),
+                                    ],
+                                    content: Text(
+                                      'Confirm payment of \$${selectedFood!.price}',
+                                      textScaler: const TextScaler.linear(1.4),
                                     ),
-                                  ],
-                                  content: Text(
-                                    'Confirm payment of \$${selectedFood!.price}',
-                                    textScaler: const TextScaler.linear(1.4),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          style: const ButtonStyle(
-                              backgroundColor:
-                                  WidgetStatePropertyAll(Colors.amberAccent)),
-                          child: const Text(
-                            'Buy now',
-                            textScaler: TextScaler.linear(1.5),
-                            style: TextStyle(color: Colors.black),
-                          )),
+                                  );
+                                },
+                              );
+                            },
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    WidgetStatePropertyAll(Colors.amberAccent)),
+                            child: const Text(
+                              'Buy now',
+                              textScaler: TextScaler.linear(1.5),
+                              style: TextStyle(color: Colors.black),
+                            )),
+                      ),
                     ],
                   ),
                 ),

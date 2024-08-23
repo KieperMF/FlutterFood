@@ -6,9 +6,13 @@ class FoodModel {
   String? description;
   String? category;
   num? avaliation;
+  num? avaliationNumber;
+  num? avaliationsPoints;
 
   FoodModel(
       {this.avaliation,
+      this.avaliationNumber,
+      this.avaliationsPoints,
       this.category,
       this.description,
       this.foodImage,
@@ -19,6 +23,8 @@ class FoodModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'avaliationsPoints' : avaliationsPoints,
+      'avaliationNumber' : avaliationNumber,
       'name': name,
       'price': price,
       'description': description,
@@ -32,6 +38,8 @@ class FoodModel {
     return FoodModel(
       id: json['id'],
       name: json['name'],
+      avaliationNumber: json['avaliationNumber'],
+      avaliationsPoints: json['avaliationsPoints'],
       avaliation: json['avaliation'],
       category: json['category'],
       description: json['description'],

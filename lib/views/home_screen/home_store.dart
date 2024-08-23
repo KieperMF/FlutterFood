@@ -23,6 +23,8 @@ class HomeStore with ChangeNotifier {
 
   void foodsByCategory() {
     for (int i = 0; allFoods.length > i; i++) {
+      num avaliation = allFoods[i].avaliationsPoints! / allFoods[i].avaliationNumber!;
+      allFoods[i].avaliation = double.parse(avaliation.toStringAsFixed(1));
       if (allFoods[i].category == 'Hamburger') {
         hamburger.add(allFoods[i]);
       }
@@ -39,12 +41,17 @@ class HomeStore with ChangeNotifier {
     for (int i = 0; allFoods.length > i; i++) {
       if (allFoods[i].category == 'Hamburger' ||
           allFoods[i].category == 'Meal') {
-        if (allFoods[i].avaliation != null) {
-          if (allFoods[i].avaliation! >= 4.0) {
+        if (allFoods[i].avaliationNumber != null) {
+          num avaliation = allFoods[i].avaliationsPoints! / allFoods[i].avaliationNumber!;
+          if (avaliation >= 4.0) {
             bestRated.add(allFoods[i]);
           }
         }
       }
+    }
+    for(int i = 0; bestRated.length > i; i++){
+      num avaliation = bestRated[i].avaliationsPoints! / bestRated[i].avaliationNumber!;
+      bestRated[i].avaliation = double.parse(avaliation.toStringAsFixed(1));
     }
   }
 
@@ -54,23 +61,8 @@ class HomeStore with ChangeNotifier {
     meals.clear();
     allFoods.clear();
     allFoods = await service.getFoods();
-    for (int i = 0; allFoods.length > i; i++) {
-      if (allFoods[i].category == 'Hamburger') {
-        //if (allFoods[i].id != hamburger[i].id) {
-          hamburger.add(allFoods[i]);
-        //}
-      }
-      if (allFoods[i].category == 'Drink') {
-        //if (allFoods[i].id != drinks[i].id) {
-          drinks.add(allFoods[i]);
-        //}
-      }
-      if (allFoods[i].category == 'Meal') {
-        //if (allFoods[i].id != meals[i].id) {
-          meals.add(allFoods[i]);
-        //}
-      }
-    }
+    foodsByCategory();
+    getBestRated();
     notifyListeners();
   }
 }

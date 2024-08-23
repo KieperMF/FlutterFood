@@ -68,73 +68,77 @@ class _CartPageState extends State<CartPage>
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 5,
                     ),
-                    TextButton(
-                        style: const ButtonStyle(
-                            backgroundColor:
-                                WidgetStatePropertyAll(Colors.yellow)),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text(
-                                      'Cancel',
-                                      style: TextStyle(color: Colors.black),
-                                      textScaler: TextScaler.linear(1.5),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          content: const Text(
-                                            'Thanks for the prefrerence',
-                                            textScaler: TextScaler.linear(1.4),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text(
-                                                  'OK',
-                                                  style: TextStyle(
-                                                      color: Colors.black),
-                                                  textScaler:
-                                                      TextScaler.linear(1.5),
-                                                ),),
-                                          ],
+                    store!.cartProducts.isNotEmpty
+                        ? TextButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    WidgetStatePropertyAll(Colors.yellow)),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'Cancel',
+                                          style: TextStyle(color: Colors.black),
+                                          textScaler: TextScaler.linear(1.5),
                                         ),
-                                      );
-                                      store!.payment();
-                                    },
-                                    child: const Text(
-                                      'Confirm',
-                                      style: TextStyle(color: Colors.black),
-                                      textScaler: TextScaler.linear(1.5),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              content: const Text(
+                                                'Thanks for the prefrerence',
+                                                textScaler:
+                                                    TextScaler.linear(1.4),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text(
+                                                    'OK',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                    textScaler:
+                                                        TextScaler.linear(1.5),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                          store!.payment();
+                                        },
+                                        child: const Text(
+                                          'Confirm',
+                                          style: TextStyle(color: Colors.black),
+                                          textScaler: TextScaler.linear(1.5),
+                                        ),
+                                      ),
+                                    ],
+                                    content: Text(
+                                      'Confirm payment of \$${store!.totalprice}',
+                                      textScaler: const TextScaler.linear(1.4),
                                     ),
-                                  ),
-                                ],
-                                content: Text(
-                                  'Confirm payment of \$${store!.totalprice}',
-                                  textScaler: const TextScaler.linear(1.4),
-                                ),
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
-                        child: const Text(
-                          'Buy',
-                          style: TextStyle(color: Colors.black),
-                          textScaler: TextScaler.linear(1.4),
-                        ))
+                            child: const Text(
+                              'Buy',
+                              style: TextStyle(color: Colors.black),
+                              textScaler: TextScaler.linear(1.4),
+                            ))
+                        : const Text(''),
                   ],
                 ),
                 if (store!.cartProducts.isNotEmpty) ...[
@@ -148,7 +152,10 @@ class _CartPageState extends State<CartPage>
                               Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Container(
-                                  color: const Color.fromRGBO(38, 38, 38, 1),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.yellow),
+                                      color:
+                                          const Color.fromRGBO(38, 38, 38, 1)),
                                   child: Row(
                                     children: [
                                       Padding(
@@ -261,7 +268,11 @@ class _CartPageState extends State<CartPage>
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
-                                                  child: const Text('Cancel', style: TextStyle(color: Colors.black),)),
+                                                  child: const Text(
+                                                    'Cancel',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  )),
                                               TextButton(
                                                   onPressed: () {
                                                     store!.deleteFoodFromCart(
@@ -287,7 +298,11 @@ class _CartPageState extends State<CartPage>
                                                               39, 39, 42, 1),
                                                     ));
                                                   },
-                                                  child: const Text('Remove', style: TextStyle(color: Colors.black),)),
+                                                  child: const Text(
+                                                    'Remove',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  )),
                                             ],
                                           );
                                         });
