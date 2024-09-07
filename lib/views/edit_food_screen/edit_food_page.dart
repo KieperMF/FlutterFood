@@ -207,7 +207,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                             icon: const Icon(
                                                 color: Colors.white,
                                                 Icons.download_rounded),
-                                            value: dropDownValue,
+                                            value: store!.foods[index].category,
                                             style: const TextStyle(
                                                 color: Colors.white),
                                             items: store!.categories
@@ -241,6 +241,11 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                                                 .text,
                                                             
                                                         index);
+                                                        if(store!.service.updatedFood){
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                            const SnackBar(content: Text("Food Updated")));
+                                                            store!.service.updatedFood = false;
+                                                        }
                                                   },
                                                   child: const Text(
                                                     textScaler:

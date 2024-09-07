@@ -8,6 +8,7 @@ import 'package:flutter_food/models/food_model.dart';
 class FoodService {
   FirebaseStorage storage = FirebaseStorage.instance;
   FirebaseFirestore firesStore = FirebaseFirestore.instance;
+  bool updatedFood = false;
 
   void postFood(FoodModel foodModel) async {
     String id = foodModel.id.toString();
@@ -55,6 +56,7 @@ class FoodService {
   void updateFood(FoodModel foodSelec){
     try{
       firesStore.collection('foods').doc('${foodSelec.id}').update(foodSelec.toMap());
+      updatedFood = true;
     }catch(e){
       debugPrint('error on update food: $e');
     }

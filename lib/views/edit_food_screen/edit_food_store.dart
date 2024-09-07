@@ -23,7 +23,6 @@ class EditFoodStore with ChangeNotifier{
   }
 
   updateFood(String name, String desc, String categ, String price, int index)async{
-    debugPrint('${price.isEmpty}');
     num priceParsed = price.isNotEmpty ? num.parse(price) : 0;
     foods[index].name = name != '' ? name :  foods[index].name;
     foods[index].description = desc != '' ? desc : foods[index].description;
